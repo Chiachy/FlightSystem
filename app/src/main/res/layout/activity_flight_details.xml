@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.shanshan.flightmanager.FlightDetails">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="航空公司"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/blueDark"
+        android:id="@+id/flightCompanyName"
+        android:layout_marginTop="6dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/site_from"
+        android:textColor="@color/black"
+        android:id="@+id/textView2"
+        android:layout_marginTop="7dp"
+        android:layout_below="@+id/flightCompanyName"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/site_to"
+        android:textColor="@color/black"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fight_day"
+        android:textColor="@color/black"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="香港国际机场"
+        android:id="@+id/siteTo"
+        android:layout_above="@+id/textView4"
+        android:layout_toEndOf="@+id/textView3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="北京首都国际机场"
+        android:id="@+id/siteFrom"
+        android:layout_above="@+id/textView3"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="日一二三四五六"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/perWeek"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MF1024"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/flightNumber"
+        android:layout_alignBottom="@+id/flightCompanyName"
+        android:layout_alignEnd="@+id/perWeek"
+        android:layout_marginEnd="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_from"
+        android:textColor="@color/black"
+        android:id="@+id/textView10"
+        android:layout_above="@+id/siteTo"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="57dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8:00"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/timeFrom"
+        android:layout_alignTop="@+id/textView10"
+        android:layout_toEndOf="@+id/textView12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_to"
+        android:textColor="@color/black"
+        android:id="@+id/textView12"
+        android:layout_above="@+id/perWeek"
+        android:layout_alignStart="@+id/textView10" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/plane_type"
+        android:textColor="@color/black"
+        android:id="@+id/textView14"
+        android:layout_alignBottom="@+id/perWeek"
+        android:layout_alignStart="@+id/textView12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11:00"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/timeTo"
+        android:layout_below="@+id/timeFrom"
+        android:layout_alignStart="@+id/timeFrom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="南昌"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/textView16"
+        android:layout_alignBottom="@+id/textView14"
+        android:layout_alignStart="@+id/timeTo" />
+
+</RelativeLayout>

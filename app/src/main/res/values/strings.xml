@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Flight Manager</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">账号/手机号/邮箱</string>
+    <string name="prompt_password">请输入密码 (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_administrator_login">Administrator Login in</string>
+    <string name="title_activity_administrator">AdministratorActivity</string>
+
+    <string name="fight_number">航班号：</string>
+    <string name="site_from">出发地点：</string>
+    <string name="site_to">到达地点：</string>
+    <string name="time_from">出发时间：</string>
+    <string name="time_to">到达时间：</string>
+    <string name="fight_day">每周班次：</string>
+    <string name="plane_type">中转城市：</string>
+    <string name="flight_browse_title">航班信息浏览</string>
+    <string name="title_activity_flight_details">FlightDetails</string>
+    <string name="title_activity_user_login">用户登陆</string>
+    <string name="title_activity_manager_login">Sign in</string>
+    <string name="title_activity_manag_tips">管理员登录？</string>
+
+
+</resources>

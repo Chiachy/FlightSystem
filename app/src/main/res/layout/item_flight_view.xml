@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:weightSum="1">
+
+
+    <TextView
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="北京"
+        android:id="@+id/where_from"
+        android:layout_marginStart="18dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  至  "
+        android:id="@+id/textView5"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/where_from" />
+
+    <TextView
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上海"
+        android:id="@+id/where_to"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/textView5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8:00"
+        android:id="@+id/time_begin"
+        android:layout_marginStart="40dp"
+        android:layout_alignTop="@+id/where_to"
+        android:layout_toEndOf="@+id/where_to" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  ~  "
+        android:id="@+id/textView8"
+        android:layout_alignTop="@+id/time_begin"
+        android:layout_toEndOf="@+id/time_begin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11:00"
+        android:id="@+id/time_end"
+        android:layout_alignTop="@+id/textView8"
+        android:layout_toEndOf="@+id/textView8" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="中转："
+        android:id="@+id/textView11"
+        android:layout_alignBottom="@+id/where_to"
+        android:layout_alignStart="@+id/time_begin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="南昌"
+        android:id="@+id/trans_city"
+        android:layout_alignTop="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11" />
+
+</RelativeLayout>
