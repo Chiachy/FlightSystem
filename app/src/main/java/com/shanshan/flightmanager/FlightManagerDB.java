@@ -2,7 +2,11 @@ package com.shanshan.flightmanager;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by shanshan on 2016/3/16.
@@ -11,6 +15,7 @@ public class FlightManagerDB {
 
     //数据库名
     public static final String DB_NAME = "flight_manager" ;
+
     //数据库版本
     public static final int VERSION = 1 ;
 
@@ -43,8 +48,8 @@ public class FlightManagerDB {
     public void saveFlightDatas(FlightDatas flightDatas){
         if(flightDatas != null){
             ContentValues values = new ContentValues();
-            values.put("company_id" , flightDatas.getCompanyId());
             values.put("flight_number" , flightDatas.getFlightNumber());
+            values.put("company_id" , flightDatas.getCompanyId());
             values.put("where_from" , flightDatas.getWhereFrom());
             values.put("where_to" , flightDatas.getWhereTo());
             values.put("time_begin" , flightDatas.getTimeBegin());
@@ -55,6 +60,31 @@ public class FlightManagerDB {
         }
     }
 
+    /*
+    * 从数据库读取所有航班信息
+    * */
+    public List<FlightDatas> loadFlightDatas() {
+        List<FlightDatas> list = new ArrayList<FlightDatas>();
+        Cursor cursor = db.query("FlightData" , null , null , null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                FlightDatas flightDatas = new FlightDatas();
+                flightDatas.setFlightNumber(cursor.getString(cursor.getColumnIndex("flight_number")));
+                flightDatas.setCompanyId(cursor.getString(cursor.getColumnIndex("company_id")));
+                flightDatas.setWhereFrom(cursor.getString(cursor.getColumnIndex("where_from")));
+                flightDatas.setWhereTo(cursor.getString(cursor.getColumnIndex("where_to")));
+                flightDatas.setTimeBegin(cursor.getString(cursor.getColumnIndex("time_begin")));
+                flightDatas.setTimeEnd(cursor.getString(cursor.getColumnIndex("time_end")));
+                flightDatas.setTransCity(cursor.getString(cursor.getColumnIndex("trans_city")));
+                flightDatas.setDay(cursor.getString(cursor.getColumnIndex("day")));
+                list.add(flightDatas);
+            }while (cursor.moveToNext());
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return list;
+    }
 
 
 }

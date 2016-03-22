@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by shanshan on 2016/3/14.
+ *
+ * 这是一个数据库操作辅助类
  */
 public class FlightDatabaseOpenHelper extends SQLiteOpenHelper {
 

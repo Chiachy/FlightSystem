@@ -27,7 +27,6 @@ public class FlightBrowsing extends AppCompatActivity {
 
     public List<testData> testDataList = new ArrayList<testData>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +67,9 @@ public class FlightBrowsing extends AppCompatActivity {
         //创建并设置适配器
         fbAdapter = new RecyclerViewAdapterForFB(this, testData);
         //fbRecyclerView.setAdapter(fbAdapter = new MyAdapter(initData()));*/
+
+
+
 
     }//onCreate's END
 
@@ -162,7 +164,7 @@ public class FlightBrowsing extends AppCompatActivity {
     //toolbar设置
     private void setSupportActionBar(Toolbar fbtoolbar) {
 
-        fbtoolbar.setNavigationIcon(R.drawable.perm_group_personal_info);
+        //fbtoolbar.setNavigationIcon(R.drawable.perm_group_personal_info);
     }
 }
 
