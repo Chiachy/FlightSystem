@@ -24,9 +24,6 @@
             android:name=".FlightDetails"
             android:label="@string/title_activity_flight_details" />
         <activity
-            android:name=".UserLoginActivity"
-            android:label="@string/title_activity_user_login" />
-        <activity
             android:name=".ManagerLoginActivity"
             android:label="@string/title_activity_manager_login"></activity>
     </application>

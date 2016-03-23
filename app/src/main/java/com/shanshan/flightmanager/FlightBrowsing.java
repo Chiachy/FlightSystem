@@ -1,15 +1,15 @@
 package com.shanshan.flightmanager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -25,7 +25,10 @@ public class FlightBrowsing extends AppCompatActivity {
      * private RecyclerView.Adapter fbAdapter;
      */
 
-    public List<testData> testDataList = new ArrayList<testData>();
+    private List<testData> testDataList = new ArrayList<testData>();
+    private FloatingActionButton flightBroChooseButton;
+    private RecyclerView userListView;
+    private recycleViewAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +40,21 @@ public class FlightBrowsing extends AppCompatActivity {
         setSupportActionBar(fbToolbar);
 
         initTestData();//初始化listView测试数据
-        //实例化数据适配器
+        initViews();//初始化布局
+        mAdapter = new recycleViewAdapter(this , testDataList);
+        userListView.setAdapter(mAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL , false);
+        userListView.setLayoutManager(linearLayoutManager);
+
+/*        //实例化数据适配器
         testDataAdapter adapter = new testDataAdapter(FlightBrowsing.this, R.layout.item_flight_view
                     , testDataList);
         //listView实例化
         ListView dUsrListView = (ListView) findViewById(R.id.userlistView);
-        dUsrListView.setAdapter(adapter);
+        dUsrListView.setAdapter(adapter);*/
         //注册ListView点击事件
-        dUsrListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*dUsrListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 testData testData = testDataList.get(position);
@@ -52,29 +62,25 @@ public class FlightBrowsing extends AppCompatActivity {
                 Intent intent = new Intent(FlightBrowsing.this, FlightDetails.class);
                 startActivity(intent);
             }
+        });*/
+
+
+        flightBroChooseButton = (FloatingActionButton) findViewById(R.id.flight_bro_choose_button);
+        flightBroChooseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
         });
-
-        // TODO: 2016/3/10 暂时将recyclerView换为listView，中期答辩后进一步深化recyclerView的使用
-        /**
-         * //试使用一个initViews函数封装所有View的id绑定
-        、、initViews();
-        fbRecyclerView = (RecyclerView) findViewById(R.id.RecycleView);
-        //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
-        fbRecyclerView.setHasFixedSize(true);
-        // 创建默认的线性LayoutManager
-        fbLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        fbRecyclerView.setLayoutManager(fbLayoutManager);
-        //创建并设置适配器
-        fbAdapter = new RecyclerViewAdapterForFB(this, testData);
-        //fbRecyclerView.setAdapter(fbAdapter = new MyAdapter(initData()));*/
-
-
-
 
     }//onCreate's END
 
+    private void initViews() {
+        userListView = (RecyclerView) findViewById(R.id.userlistView);
+    }
 
-    //自定义测试用初始化数据
+
+    //自定义测试用初始化数据,用后即删
     private void initTestData() {
 
         testData first = new testData("北京", "上海", "8:06", "10:38", "杭州");
@@ -167,5 +173,4 @@ public class FlightBrowsing extends AppCompatActivity {
         //fbtoolbar.setNavigationIcon(R.drawable.perm_group_personal_info);
     }
 }
-
 
