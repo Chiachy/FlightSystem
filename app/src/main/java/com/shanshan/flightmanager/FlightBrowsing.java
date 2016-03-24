@@ -1,6 +1,8 @@
 package com.shanshan.flightmanager;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +40,6 @@ public class FlightBrowsing extends AppCompatActivity {
         //实例化Toolbar
         Toolbar fbToolbar = (Toolbar) findViewById(R.id.fb_toolbar);
         setSupportActionBar(fbToolbar);
-
         initTestData();//初始化listView测试数据
         initViews();//初始化布局
         mAdapter = new recycleViewAdapter(this , testDataList);
@@ -46,25 +47,6 @@ public class FlightBrowsing extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL , false);
         userListView.setLayoutManager(linearLayoutManager);
-
-/*        //实例化数据适配器
-        testDataAdapter adapter = new testDataAdapter(FlightBrowsing.this, R.layout.item_flight_view
-                    , testDataList);
-        //listView实例化
-        ListView dUsrListView = (ListView) findViewById(R.id.userlistView);
-        dUsrListView.setAdapter(adapter);*/
-        //注册ListView点击事件
-        /*dUsrListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                testData testData = testDataList.get(position);
-                //点击后跳转到详细航班信息页面
-                Intent intent = new Intent(FlightBrowsing.this, FlightDetails.class);
-                startActivity(intent);
-            }
-        });*/
-
-
         flightBroChooseButton = (FloatingActionButton) findViewById(R.id.flight_bro_choose_button);
         flightBroChooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,13 +54,81 @@ public class FlightBrowsing extends AppCompatActivity {
 
             }
         });
-
     }//onCreate's END
+
+    //RecycleView 分割线装饰
+    public class DividerLine extends RecyclerView.ItemDecoration {
+        public static final int HORIZONTAL = LinearLayoutManager.HORIZONTAL;
+
+        public static final int VERTICAL = LinearLayoutManager.VERTICAL;
+
+        //画笔
+        private Paint paint;
+
+        //布局方向
+        private int orientation;
+
+        //分割线颜色
+        private int color;
+
+        //分割线尺寸
+        public DividerLine(){
+            this(VERTICAL);
+        }
+
+        public DividerLine(int orientation){
+            this.orientation = orientation;
+
+            paint = new Paint();
+        }
+
+        @Override
+        public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            super.onDrawOver(c, parent, state);
+
+            if (orientation == VERTICAL) {
+                drawHorizontal(c, parent);
+            } else {
+                drawHorizontal(c, parent);
+            }
+        }
+
+        /*
+        * 设置分割线
+        *
+        * @param color 颜色
+        * */
+        public void setColor(int color) {
+            this.color = color;
+            paint.setColor(color);
+        }
+
+        /*
+        *设置分割线尺寸
+        *
+        * @param size 尺寸
+        * */
+        public void setSize(int size){
+            // TODO: 2016/3/24 size 变量未完成 
+            //this.size = size ;
+        }
+
+        //绘制水平风格线
+        private void drawHorizontal(Canvas c, RecyclerView parent) {
+            final int left = parent.getPaddingLeft();
+            final int right = parent.getWidth() - parent.getPaddingRight();
+
+            final int childCount = parent.getChildCount();
+            for(int i= 0; i < childCount ; i++){
+                // TODO: 2016/3/24 recycleView 分割线绘制未完成 
+                //final RecyclerView.LayoutParams params = child.
+            }
+        }
+    }
 
     private void initViews() {
         userListView = (RecyclerView) findViewById(R.id.userlistView);
     }
-
 
     //自定义测试用初始化数据,用后即删
     private void initTestData() {
@@ -123,8 +173,6 @@ public class FlightBrowsing extends AppCompatActivity {
         testDataList.add(first19);
         testData first20 = new testData("北京", "上海", "8:06", "10:38", "南昌");
         testDataList.add(first20);
-
-
     }
 
 //    private void initViews() {
@@ -141,7 +189,6 @@ public class FlightBrowsing extends AppCompatActivity {
         resourceId = resource;
     }
 
-    //
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         testData testData = getItem(position);//获取当前项testData的实例
