@@ -1,6 +1,5 @@
 package com.shanshan.flightmanager;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -8,11 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toolbar;
 
 import java.util.ArrayList;
@@ -41,7 +36,7 @@ public class FlightBrowsing extends AppCompatActivity {
         Toolbar fbToolbar = (Toolbar) findViewById(R.id.fb_toolbar);
         setSupportActionBar(fbToolbar);
         initTestData();//初始化listView测试数据
-        initViews();//初始化布局
+        initViews();//初始化RecycleView
         mAdapter = new recycleViewAdapter(this , testDataList);
         userListView.setAdapter(mAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
@@ -54,22 +49,44 @@ public class FlightBrowsing extends AppCompatActivity {
 
             }
         });
-    }//onCreate's END
 
-    //RecycleView 分割线装饰
+        //绘制分割线
+        DividerLine recycViewDividerLine = new DividerLine(DividerLine.HORIZONTAL);
+        recycViewDividerLine.setSize(15);
+        recycViewDividerLine.setColor(0xFFDDDDDD);
+        userListView.addItemDecoration(recycViewDividerLine);
+    }
+
+    /**
+     * 初始化View
+     * */
+    private void initViews() {
+        userListView = (RecyclerView) findViewById(R.id.userlistView);
+    }
+
+    /**
+     * toolbar设置
+     * */
+    private void setSupportActionBar(Toolbar fbtoolbar) {
+
+        //fbtoolbar.setNavigationIcon(R.drawable.perm_group_personal_info);
+    }
+
+    /**
+     * RecycleView 分割线装饰类
+     */
     public class DividerLine extends RecyclerView.ItemDecoration {
         public static final int HORIZONTAL = LinearLayoutManager.HORIZONTAL;
 
         public static final int VERTICAL = LinearLayoutManager.VERTICAL;
 
-        //画笔
-        private Paint paint;
+        private Paint paint;//画笔
 
-        //布局方向
-        private int orientation;
+        private int orientation;//布局方向
 
-        //分割线颜色
-        private int color;
+        private int color;//分割线颜色
+
+        private int size;//分割线尺寸
 
         //分割线尺寸
         public DividerLine(){
@@ -78,7 +95,6 @@ public class FlightBrowsing extends AppCompatActivity {
 
         public DividerLine(int orientation){
             this.orientation = orientation;
-
             paint = new Paint();
         }
 
@@ -109,10 +125,27 @@ public class FlightBrowsing extends AppCompatActivity {
         * @param size 尺寸
         * */
         public void setSize(int size){
-            // TODO: 2016/3/24 size 变量未完成 
-            //this.size = size ;
+            this.size = size ;
         }
 
+        /*
+        * 绘制垂直分割线
+        * */
+        protected void drawVertical(Canvas c, RecyclerView parent){
+            final int top = parent.getPaddingTop();
+            final int bottom = parent.getHeight() - parent.getPaddingBottom();
+
+            final int childCount = parent.getChildCount();
+            for (int i = 0; i < childCount ; i++){
+                final View child = parent.getChildAt(i);
+                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+                final int left = child.getRight() + params.rightMargin;
+                final int right = left + size ;
+
+                c.drawRect(left , top , right , bottom, paint);
+            }
+
+        }
         //绘制水平风格线
         private void drawHorizontal(Canvas c, RecyclerView parent) {
             final int left = parent.getPaddingLeft();
@@ -120,19 +153,20 @@ public class FlightBrowsing extends AppCompatActivity {
 
             final int childCount = parent.getChildCount();
             for(int i= 0; i < childCount ; i++){
-                // TODO: 2016/3/24 recycleView 分割线绘制未完成 
-                //final RecyclerView.LayoutParams params = child.
+                final View child = parent.getChildAt(i);
+                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+                final int top = child.getBottom() + params.bottomMargin;
+                final int bottom = top + size ;
+
+                c.drawRect(left , top , right , bottom, paint);
             }
         }
     }
 
-    private void initViews() {
-        userListView = (RecyclerView) findViewById(R.id.userlistView);
-    }
-
-    //自定义测试用初始化数据,用后即删
+    /**
+     * 自定义测试用初始化数据,实现SQLite后弃用
+     * */
     private void initTestData() {
-
         testData first = new testData("北京", "上海", "8:06", "10:38", "杭州");
         testDataList.add(first);
         testData second = new testData("深圳", "上海", "8:06", "10:38", "南昌");
@@ -175,49 +209,41 @@ public class FlightBrowsing extends AppCompatActivity {
         testDataList.add(first20);
     }
 
-//    private void initViews() {
-//        fbRecyclerView = (RecyclerView) findViewById(R.id.RecycleView);
+
+//    //测试数据适配器,适配于ListView
+//    public class testDataAdapter extends ArrayAdapter<testData>{
+//
+//        private int resourceId;
+//
+//    public testDataAdapter(Context context, int resource, List<com.shanshan.flightmanager.testData> objects) {
+//        super(context, resource, objects);
+//        resourceId = resource;
 //    }
+//
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        testData testData = getItem(position);//获取当前项testData的实例
+//        //优化getViee()
+//        View view;
+//        if ( convertView == null ){
+//            //将子项加载入布局
+//            view = LayoutInflater.from(getContext()).inflate(resourceId, null);
+//        }else{
+//            view = convertView;
+//        }
+//        TextView dwhereFrom = (TextView) view.findViewById(R.id.where_from);
+//        TextView dwhereTo = (TextView) view.findViewById(R.id.where_to);
+//        TextView dtimeBegin = (TextView) view.findViewById(R.id.time_begin);
+//        TextView dtimeEnd = (TextView) view.findViewById(R.id.time_end);
+//        TextView dtransCity = (TextView) view.findViewById(R.id.trans_city);
+//        dwhereFrom.setText(testData.getWhereFrom());
+//        dwhereTo.setText(testData.getWhereTo());
+//        dtimeBegin.setText(testData.getTimeBegin());
+//        dtimeEnd.setText(testData.getTimeEnd());
+//        dtransCity.setText(testData.getTransCity());
+//        return view;
+//    }
+//}
 
-    //测试数据适配器,适配于ListView
-    public class testDataAdapter extends ArrayAdapter<testData>{
-
-        private int resourceId;
-
-    public testDataAdapter(Context context, int resource, List<com.shanshan.flightmanager.testData> objects) {
-        super(context, resource, objects);
-        resourceId = resource;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        testData testData = getItem(position);//获取当前项testData的实例
-        //优化getViee()
-        View view;
-        if ( convertView == null ){
-            //将子项加载入布局
-            view = LayoutInflater.from(getContext()).inflate(resourceId, null);
-        }else{
-            view = convertView;
-        }
-        TextView dwhereFrom = (TextView) view.findViewById(R.id.where_from);
-        TextView dwhereTo = (TextView) view.findViewById(R.id.where_to);
-        TextView dtimeBegin = (TextView) view.findViewById(R.id.time_begin);
-        TextView dtimeEnd = (TextView) view.findViewById(R.id.time_end);
-        TextView dtransCity = (TextView) view.findViewById(R.id.trans_city);
-        dwhereFrom.setText(testData.getWhereFrom());
-        dwhereTo.setText(testData.getWhereTo());
-        dtimeBegin.setText(testData.getTimeBegin());
-        dtimeEnd.setText(testData.getTimeEnd());
-        dtransCity.setText(testData.getTransCity());
-        return view;
-    }
-}
-
-    //toolbar设置
-    private void setSupportActionBar(Toolbar fbtoolbar) {
-
-        //fbtoolbar.setNavigationIcon(R.drawable.perm_group_personal_info);
-    }
 }
 
