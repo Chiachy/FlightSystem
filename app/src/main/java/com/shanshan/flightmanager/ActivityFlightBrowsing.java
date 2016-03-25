@@ -1,5 +1,6 @@
 package com.shanshan.flightmanager;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -7,20 +8,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlightBrowsing extends AppCompatActivity {
-
-    /*
-     * RecyclerView 控件注册
-     * private RecyclerView fbRecyclerView;
-     * private RecyclerView.LayoutManager fbLayoutManager;
-     * private RecyclerView.Adapter fbAdapter;
-     */
+public class ActivityFlightBrowsing extends AppCompatActivity {
 
     private List<testData> testDataList = new ArrayList<testData>();
     private FloatingActionButton flightBroChooseButton;
@@ -31,30 +28,48 @@ public class FlightBrowsing extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_browsing);
+
+        /**Toolbar 配置代码块*/
         //TODO: 2016/3/9 Toolbar代码块:Toolbar定义未完成
-        //实例化Toolbar
         Toolbar fbToolbar = (Toolbar) findViewById(R.id.fb_toolbar);
-        setSupportActionBar(fbToolbar);
+        setActionBar(fbToolbar);
+        //绑定item的点击事件,并调用
+        fbToolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+
+        /** recycleView 配置代码块 */
         initTestData();//初始化listView测试数据
+
         initViews();//初始化RecycleView
+
         mAdapter = new recycleViewAdapter(this , testDataList);
+
         userListView.setAdapter(mAdapter);
+
+        //设置re-View的布局，并调用
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL , false);
+
         userListView.setLayoutManager(linearLayoutManager);
+
+        //设置分割线属性，并调用
+        DividerLine recycViewDividerLine = new DividerLine(DividerLine.HORIZONTAL);
+
+        recycViewDividerLine.setSize(15);
+
+        recycViewDividerLine.setColor(0xFFDDDDDD);
+
+        userListView.addItemDecoration(recycViewDividerLine);
+
+        /** fab配置代码块 */
         flightBroChooseButton = (FloatingActionButton) findViewById(R.id.flight_bro_choose_button);
         flightBroChooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // TODO: 2016/3/25 fab的点击跳转功能
+                Toast.makeText(ActivityFlightBrowsing.this, "功能尚未完成", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
-
-        //绘制分割线
-        DividerLine recycViewDividerLine = new DividerLine(DividerLine.HORIZONTAL);
-        recycViewDividerLine.setSize(15);
-        recycViewDividerLine.setColor(0xFFDDDDDD);
-        userListView.addItemDecoration(recycViewDividerLine);
     }
 
     /**
@@ -65,12 +80,49 @@ public class FlightBrowsing extends AppCompatActivity {
     }
 
     /**
-     * toolbar设置
+     * toolbar配置
      * */
-    private void setSupportActionBar(Toolbar fbtoolbar) {
+    /*
+    * 设置menu item的监听器
+    * */
+    private Toolbar.OnMenuItemClickListener onMenuItemClickListener =
+            new Toolbar.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityManagerLogin.class);
+            startActivity(intent);
+            return false;
+        }
+    };
 
-        //fbtoolbar.setNavigationIcon(R.drawable.perm_group_personal_info);
+    /*
+     * 此方法用于初始化菜单，其中menu参数就是即将要显示的Menu实例。
+     * 返回true则显示该menu,false 则不显示;
+     * (只会在第一次初始化菜单时调用)
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_sign_in:
+                Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityManagerLogin.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
     /**
      * RecycleView 分割线装饰类
