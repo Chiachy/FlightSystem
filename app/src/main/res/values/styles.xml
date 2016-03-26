@@ -15,5 +15,8 @@
         <item name="android:colorControlNormal">@color/colorContorlNormal</item>
     </style>
 
-
+    <!--自定义Toolbar样式-->
+    <style name="ToolbarStyle" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="android:actionMenuTextColor">#e9e9e9</item>
+    </style>
 </resources>

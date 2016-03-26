@@ -2,6 +2,7 @@ package com.shanshan.flightmanager;
 
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -32,7 +33,9 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         /**Toolbar 配置代码块*/
         //TODO: 2016/3/9 Toolbar代码块:Toolbar定义未完成
         Toolbar fbToolbar = (Toolbar) findViewById(R.id.fb_toolbar);
+        fbToolbar.setTitleTextColor(Color.parseColor("#e9e9e9"));
         setActionBar(fbToolbar);
+
         //绑定item的点击事件,并调用
         fbToolbar.setOnMenuItemClickListener(onMenuItemClickListener);
 

@@ -3,10 +3,10 @@
     <color name="colorPrimary">#0090ff</color>
     <color name="colorPrimaryDark">#007ddd</color>
     <color name="colorAccent">#0090ff</color>
-    <color name="textColorPrimary">#e9e9e9</color>
+    <color name="textColorPrimary">#6b6b6b</color>
     <color name="colorControlHighlight">#82c9ff</color>
     <color name="navigationBarColor">#0090ff</color>
-    <color name="colorContorlNormal">#e9e9e9</color>
+    <color name="colorContorlNormal">#ffffff</color>
 
     <color name="site">#f4b50968</color>
     <color name="blueDark">#1b2774</color>
