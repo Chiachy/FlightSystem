@@ -6,7 +6,7 @@
     <item
         android:orderInCategory="0"
         android:showAsAction="ifRoom"
-        android:title="@string/action_sign_in"
+        android:title="@string/action_signin"
         android:icon="@drawable/ic_perm_identity_white"
         android:id= "@+id/action_sign_in" />
 

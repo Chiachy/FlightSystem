@@ -21,11 +21,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FlightDetails"
-            android:label="@string/title_activity_flight_details" />
+            android:name=".ActivityFlightDetails"
+            android:label="@string/title_activity_activity_flight_details" />
         <activity
-            android:name=".ActivityManagerLogin"
-            android:label="@string/title_activity_manager_login"></activity>
+            android:name=".ActivityUserLogin"
+            android:label="@string/title_activity_activity_user_login" />
+        <activity
+            android:name=".ActivityManagerView"
+            android:label="@string/title_activity_activity_manager_view"></activity>
     </application>
 
 </manifest>

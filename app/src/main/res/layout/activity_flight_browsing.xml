@@ -11,15 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/skyBlue"
-        android:title="@string/flight_browse_title"/>
+        android:title="@string/flight_browse_title" />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_below="@id/fb_toolbar"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
         <android.support.v7.widget.RecyclerView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/userlistView"
             android:layout_below="@+id/fb_toolbar"
@@ -35,9 +35,7 @@
             app:layout_anchor= "@id/userlistView"
             app:layout_anchorGravity= "bottom|right|end"
             android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"/>
-
-
+            android:layout_marginRight="16dp" />
 
     </android.support.design.widget.CoordinatorLayout>
 

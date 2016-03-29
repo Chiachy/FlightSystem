@@ -3,21 +3,22 @@ package com.shanshan.flightmanager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +29,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +37,13 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- *
  * A login screen that offers login via email/password.
- * 管理员登陆界面
  */
-public class ActivityManagerLogin extends Activity implements LoaderCallbacks<Cursor> {
+public class ActivityUserLogin extends Activity implements LoaderCallbacks<Cursor> {
+
+    //管理员密码
+    private static final String MANAGER_ACCOUNT = "manager@123" ;
+    private static final String MANAGER_PASSWORD = "123456" ;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -63,11 +67,14 @@ public class ActivityManagerLogin extends Activity implements LoaderCallbacks<Cu
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Toolbar mUserLoginToolbar;
+    public SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_login);
+        setContentView(R.layout.activity_activity_user_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -89,11 +96,22 @@ public class ActivityManagerLogin extends Activity implements LoaderCallbacks<Cu
             @Override
             public void onClick(View view) {
                 attemptLogin();
+               /* SharedPreferences.Editor editor = mSharedPreferences.edit();
+                editor.putString("name", mEmailView.getText().toString() );
+                editor.putString("password", mPasswordView.getText().toString() );
+                editor.commit();
+                finish();*/
             }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        //ToolBar方法实现
+        mUserLoginToolbar = (Toolbar) findViewById(R.id.user_login_toolbar);
+        mUserLoginToolbar.setTitleTextColor(Color.parseColor("#e9e9e9"));
+        setActionBar(mUserLoginToolbar);
+
     }
 
     private void populateAutoComplete() {
@@ -158,6 +176,9 @@ public class ActivityManagerLogin extends Activity implements LoaderCallbacks<Cu
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
+        //使用sharedPreferences
+        mSharedPreferences = this.getSharedPreferences("flight_data", MODE_PRIVATE);
+
         boolean cancel = false;
         View focusView = null;
 
@@ -179,6 +200,17 @@ public class ActivityManagerLogin extends Activity implements LoaderCallbacks<Cu
             cancel = true;
         }
 
+        // TODO: 2016/3/29  sharedPreference
+        if (mEmailView.equals(MANAGER_ACCOUNT) && mPasswordView.equals(MANAGER_PASSWORD)){
+            Intent intent = new Intent(ActivityUserLogin.this , ActivityManagerView.class);
+            startActivity(intent);
+        }else if (mEmailView.equals(mSharedPreferences.getString("name", "")) &&
+                mPasswordView.equals(mSharedPreferences.getString("password", ""))){
+            mEditor = mSharedPreferences.edit();
+            mEditor.commit();
+            finish();
+        }
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -193,13 +225,13 @@ public class ActivityManagerLogin extends Activity implements LoaderCallbacks<Cu
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
+
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+
+        return password.length() > 5;
     }
 
     /**
@@ -275,7 +307,7 @@ public class ActivityManagerLogin extends Activity implements LoaderCallbacks<Cu
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(ActivityManagerLogin.this,
+                new ArrayAdapter<>(ActivityUserLogin.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);

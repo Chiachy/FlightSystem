@@ -17,7 +17,10 @@ import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * A Flight Browsing User interface
+ * 航班信息浏览界面，可以进行预定航班和查询、更改航班信息的操作，并登陆个人账号
+ * */
 public class ActivityFlightBrowsing extends AppCompatActivity {
 
     private List<testData> testDataList = new ArrayList<testData>();
@@ -33,7 +36,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         /**Toolbar 配置代码块*/
         //TODO: 2016/3/9 Toolbar代码块:Toolbar定义未完成
         Toolbar fbToolbar = (Toolbar) findViewById(R.id.fb_toolbar);
-        fbToolbar.setTitleTextColor(Color.parseColor("#e9e9e9"));
+        fbToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setActionBar(fbToolbar);
 
         //绑定item的点击事件,并调用
@@ -92,7 +95,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
             new Toolbar.OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityManagerLogin.class);
+            Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityUserLogin.class);
             startActivity(intent);
             return false;
         }
@@ -115,7 +118,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_sign_in:
-                Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityManagerLogin.class);
+                Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityUserLogin.class);
                 startActivity(intent);
                 break;
             default:
