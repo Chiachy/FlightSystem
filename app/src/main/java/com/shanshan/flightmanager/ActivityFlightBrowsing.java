@@ -104,8 +104,16 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.action_sign_in: {
-                    Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityUserLogin.class);
-                    startActivity(intent);
+                    final StaticData application = (StaticData) getApplication();
+                    if(!application.getIsLogin()){
+                        startActivity(new Intent(
+                                ActivityFlightBrowsing.this , ActivityUserLogin.class)
+                        );
+                    }else{
+                        startActivity(new Intent(
+                                ActivityFlightBrowsing.this , ActivityUserDetails.class)
+                        );
+                    }
                     break;
                 }
 

@@ -39,9 +39,12 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 
 
+
 public class ActivityUserLogin extends Activity implements LoaderCallbacks<Cursor> {
 
-    public static boolean IS_LOGIN_IN = false ;
+
+
+
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -72,6 +75,7 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_user_login);
+        final StaticData application = (StaticData) getApplication();
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -93,8 +97,9 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
             @Override
             public void onClick(View view) {
                 attemptLogin();
+                //设置为已登录状态
+                application.setIsLogin(true);
 
-                IS_LOGIN_IN = true;
             }
         });
 
@@ -105,8 +110,6 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
         mUserLoginToolbar = (Toolbar) findViewById(R.id.user_login_toolbar);
         mUserLoginToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setActionBar(mUserLoginToolbar);
-
-
 
     }
 
