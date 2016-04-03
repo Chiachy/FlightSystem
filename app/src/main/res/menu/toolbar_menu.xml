@@ -12,11 +12,11 @@
         android:icon="@drawable/ic_perm_identity_white"
         android:id= "@+id/action_sign_in" />
 
-    <item
+    <!--<item
         android:title="@string/search_button"
         android:showAsAction="ifRoom"
         android:id="@+id/action_search"
         android:orderInCategory="0"
-        android:icon="@drawable/ic_search_white_24dp" />
+        android:icon="@drawable/ic_search_white_24dp" />-->
 
 </menu>

@@ -16,7 +16,7 @@ public class FlightDatabaseOpenHelper extends SQLiteOpenHelper {
     */
     public static final String CREATE_DATAS = "create table FlightDatas(" +
             "id integer primary key autoincrement," +
-            "company_id integer ," +
+            "company_id text ," +
             "flight_number text ," +
             "where_from text ," +
             "where_to text ," +

@@ -56,6 +56,8 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
 
         userListView.setLayoutManager(linearLayoutManager);
 
+        userListView.setHasFixedSize(true);//提高性能
+
         //设置分割线属性，并调用
         DividerLine recycViewDividerLine = new DividerLine(DividerLine.HORIZONTAL);
 
@@ -65,13 +67,20 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
 
         userListView.addItemDecoration(recycViewDividerLine);
 
+        mAdapter.setmOnItemClickListener(new recycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, String data) {
+                startActivity(new Intent(ActivityFlightBrowsing.this, ActivityFlightDetails.class));
+            }
+        });
+
         /** fab配置代码块 */
         flightBroChooseButton = (FloatingActionButton) findViewById(R.id.flight_bro_choose_button);
         flightBroChooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2016/3/25 fab的点击跳转功能
-                startActivity(new Intent(ActivityFlightBrowsing.this , ActivityBooking.class));
+                Intent intent  = new Intent(ActivityFlightBrowsing.this , ActivityBooking.class);
+                startActivity(intent);
             }
         });
     }
@@ -95,15 +104,19 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.action_sign_in: {
-                    Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityUserLogin.class);
-                    startActivity(intent);
+                    final StaticData application = (StaticData) getApplication();
+                    if(!application.getIsLogin()){
+                        startActivity(new Intent(
+                                ActivityFlightBrowsing.this , ActivityUserLogin.class)
+                        );
+                    }else{
+                        startActivity(new Intent(
+                                ActivityFlightBrowsing.this , ActivityUserDetails.class)
+                        );
+                    }
                     break;
                 }
-                case R.id.action_search: {
 
-
-                    break;
-                }
                 default:
                     break;
             }

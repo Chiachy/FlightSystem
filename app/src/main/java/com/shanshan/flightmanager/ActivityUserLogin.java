@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -38,11 +37,14 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
+
+
+
 public class ActivityUserLogin extends Activity implements LoaderCallbacks<Cursor> {
 
-    //管理员密码
-    private static final String MANAGER_ACCOUNT = "manager@123" ;
-    private static final String MANAGER_PASSWORD = "123456" ;
+
+
+
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -67,13 +69,13 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
     private View mProgressView;
     private View mLoginFormView;
     private Toolbar mUserLoginToolbar;
-    public SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_user_login);
+        final StaticData application = (StaticData) getApplication();
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -95,11 +97,9 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
             @Override
             public void onClick(View view) {
                 attemptLogin();
-               /* SharedPreferences.Editor editor = mSharedPreferences.edit();
-                editor.putString("name", mEmailView.getText().toString() );
-                editor.putString("password", mPasswordView.getText().toString() );
-                editor.commit();
-                finish();*/
+                //设置为已登录状态
+                application.setIsLogin(true);
+
             }
         });
 
@@ -108,11 +108,8 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
 
         //ToolBar方法实现
         mUserLoginToolbar = (Toolbar) findViewById(R.id.user_login_toolbar);
-        mUserLoginToolbar.setTitleTextColor(Color.parseColor("#e9e9e9"));
+        mUserLoginToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setActionBar(mUserLoginToolbar);
-
-        //使用sharedPreferences
-        mSharedPreferences = this.getSharedPreferences("flight_data", MODE_PRIVATE);
 
     }
 
