@@ -23,7 +23,7 @@ import java.util.List;
  * */
 public class ActivityFlightBrowsing extends AppCompatActivity {
 
-    private List<testData> testDataList = new ArrayList<testData>();
+    public List<testData> testDataList = new ArrayList<testData>();
     private FloatingActionButton flightBroChooseButton;
     private RecyclerView userListView;
     private recycleViewAdapter mAdapter;
@@ -35,12 +35,12 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
 
         /**Toolbar 配置代码块*/
         //TODO: 2016/3/9 Toolbar代码块:Toolbar定义未完成
-        Toolbar fbToolbar = (Toolbar) findViewById(R.id.fb_toolbar);
+        Toolbar fbToolbar = (Toolbar) findViewById( R.id.fb_toolbar );
         fbToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setActionBar(fbToolbar);
 
         //绑定item的点击事件,并调用
-        fbToolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+        fbToolbar.setOnMenuItemClickListener( onMenuItemClickListener );
 
         /** recycleView 配置代码块 */
         initTestData();//初始化listView测试数据
@@ -113,7 +113,6 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -128,12 +127,11 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
     }
 
 
-
-
     /**
      * RecycleView 分割线装饰类
      */
     public class DividerLine extends RecyclerView.ItemDecoration {
+
         public static final int HORIZONTAL = LinearLayoutManager.HORIZONTAL;
 
         public static final int VERTICAL = LinearLayoutManager.VERTICAL;
@@ -196,13 +194,13 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
             final int childCount = parent.getChildCount();
             for (int i = 0; i < childCount ; i++){
                 final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+                final RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) child.getLayoutParams();
                 final int left = child.getRight() + params.rightMargin;
                 final int right = left + size ;
 
                 c.drawRect(left , top , right , bottom, paint);
             }
-
         }
         //绘制水平风格线
         private void drawHorizontal(Canvas c, RecyclerView parent) {
@@ -212,7 +210,8 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
             final int childCount = parent.getChildCount();
             for(int i= 0; i < childCount ; i++){
                 final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+                final RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) child.getLayoutParams();
                 final int top = child.getBottom() + params.bottomMargin;
                 final int bottom = top + size ;
 

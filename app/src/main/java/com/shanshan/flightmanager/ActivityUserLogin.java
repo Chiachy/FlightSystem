@@ -6,7 +6,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -112,6 +111,9 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
         mUserLoginToolbar.setTitleTextColor(Color.parseColor("#e9e9e9"));
         setActionBar(mUserLoginToolbar);
 
+        //使用sharedPreferences
+        mSharedPreferences = this.getSharedPreferences("flight_data", MODE_PRIVATE);
+
     }
 
     private void populateAutoComplete() {
@@ -130,7 +132,8 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(mEmailView, R.string.permission_rationale,
+                    Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -176,8 +179,7 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        //使用sharedPreferences
-        mSharedPreferences = this.getSharedPreferences("flight_data", MODE_PRIVATE);
+
 
         boolean cancel = false;
         View focusView = null;
@@ -200,16 +202,6 @@ public class ActivityUserLogin extends Activity implements LoaderCallbacks<Curso
             cancel = true;
         }
 
-        // TODO: 2016/3/29  sharedPreference
-        if (mEmailView.equals(MANAGER_ACCOUNT) && mPasswordView.equals(MANAGER_PASSWORD)){
-            Intent intent = new Intent(ActivityUserLogin.this , ActivityManagerView.class);
-            startActivity(intent);
-        }else if (mEmailView.equals(mSharedPreferences.getString("name", "")) &&
-                mPasswordView.equals(mSharedPreferences.getString("password", ""))){
-            mEditor = mSharedPreferences.edit();
-            mEditor.commit();
-            finish();
-        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
