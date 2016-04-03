@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
 import java.util.ArrayList;
@@ -72,8 +71,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO: 2016/3/25 fab的点击跳转功能
-                Toast.makeText(ActivityFlightBrowsing.this, "功能尚未完成", Toast.LENGTH_SHORT)
-                        .show();
+                startActivity(new Intent(ActivityFlightBrowsing.this , ActivityBooking.class));
             }
         });
     }
