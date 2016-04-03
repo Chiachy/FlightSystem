@@ -5,14 +5,102 @@
     android:layout_height="match_parent"
     tools:context="com.shanshan.flightmanager.ActivityBooking">
 
-    <android.support.v7.widget.Toolbar
+    <Toolbar
         android:id="@+id/booking_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/skyBlue"
-        android:title="@string/booking_title" >
-    </android.support.v7.widget.Toolbar>
+        android:title="@string/booking_title" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="搜索你想要的航班信息："
+        android:id="@+id/textView15"
+        android:layout_marginTop="39dp"
+        android:textSize="20sp"
+        android:layout_marginStart="21dp"
+        android:layout_below="@+id/booking_toolbar"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_marginRight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入起飞日期（年.月.日）："
+        android:id="@+id/edittext_search_day"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textView15"
+        android:layout_alignStart="@+id/textView15"
+        android:layout_marginStart="13dp" />
+
+    <EditText
+        android:layout_marginRight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_search_time_begin"
+        android:hint="请输入起飞时间（时：分）："
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/edittext_search_day"
+        android:layout_alignStart="@+id/edittext_search_day" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="查询结果："
+        android:id="@+id/textView16"
+        android:layout_below="@+id/edittext_search_time_begin"
+        android:layout_alignStart="@+id/textView15"
+        android:layout_marginTop="43dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="降落时间："
+        android:id="@+id/textView17"
+        android:layout_below="@+id/textView16"
+        android:layout_alignStart="@+id/edittext_search_time_begin"
+        android:layout_marginTop="37dp" />
+
+    <TextView
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView18"
+        android:layout_alignTop="@+id/textView17"
+        android:layout_toEndOf="@+id/textView17" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="价格："
+        android:id="@+id/textView19"
+        android:layout_below="@+id/textView17"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_marginTop="36dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginRight="30dp"
+        android:id="@+id/textView20"
+        android:layout_alignBottom="@+id/textView19"
+        android:layout_toEndOf="@+id/textView19" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="预定该航班机票"
+        android:id="@+id/button"
+        android:layout_marginBottom="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/textView17" />
 
 
 </RelativeLayout>

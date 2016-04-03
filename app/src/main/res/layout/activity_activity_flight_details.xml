@@ -1,14 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.shanshan.flightmanager.ActivityFlightDetails">
 
+    <Toolbar
+        android:id="@+id/flight_details_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/skyBlue"
+        android:title="@string/flight_details" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="航空公司"
+        android:textColor="@color/blueDark"
+        android:textSize="35sp"
+        android:id="@+id/company_id"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/flight_details_toolbar"
+        android:layout_alignParentStart="true" />
 
-</android.support.v4.widget.NestedScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="MF1302"
+        android:textColor="@color/skyBlueDark"
+        android:textSize="27sp"
+        android:id="@+id/flight_number"
+        android:layout_marginStart="34dp"
+        android:layout_alignBottom="@+id/company_id"
+        android:layout_toEndOf="@+id/company_id" />
+
+    <TextView
+        android:textSize="23sp"
+        android:textColor="@color/skyBlueDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="出发地点："
+        android:id="@+id/textView2"
+        android:layout_marginTop="47dp"
+        android:layout_below="@+id/textView12"
+        android:layout_alignStart="@+id/textView12" />
+
+    <TextView
+        android:textSize="23sp"
+        android:textColor="@color/skyBlueDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="到达地点："
+        android:id="@+id/textView3"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <TextView
+        android:textSize="23sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="北京南苑机场"
+        android:id="@+id/textView4"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/textView2"
+        android:layout_toEndOf="@+id/textView7" />
+
+    <TextView
+        android:textSize="23sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="深圳宝安国际机场"
+        android:id="@+id/textView6"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/textView4" />
+
+    <TextView
+        android:textSize="23sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="日期："
+        android:textColor="@color/skyBlueDark"
+        android:id="@+id/textView7"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/company_id"
+        android:layout_alignStart="@+id/company_id" />
+
+    <TextView
+        android:textSize="23sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="2009.9.24"
+        android:id="@+id/textView9"
+        android:layout_alignTop="@+id/textView7"
+        android:layout_alignEnd="@+id/textView13" />
+
+    <TextView
+        android:textSize="23sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="出发时间："
+        android:textColor="@color/skyBlueDark"
+        android:id="@+id/textView10"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/textView7"
+        android:layout_alignStart="@+id/textView7" />
+
+    <TextView
+        android:textSize="23sp"
+        android:textColor="@color/skyBlueDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="到达时间："
+        android:id="@+id/textView12"
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/textView10"
+        android:layout_alignStart="@+id/textView10" />
+
+    <TextView
+        android:textSize="23sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="8:00"
+        android:id="@+id/textView13"
+        android:layout_alignTop="@+id/textView10"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:textSize="23sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="9:00"
+        android:id="@+id/textView14"
+        android:layout_above="@+id/textView2"
+        android:layout_alignStart="@+id/textView13" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="预定本次航班"
+        android:id="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

@@ -9,8 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class recycleViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
+public class recycleViewAdapter extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
 
+    private OnItemClickListener mOnItemClickListener = null;
     private LayoutInflater mInflater;
     private Context mContext;
     private List<testData> mDatas;
@@ -27,6 +28,8 @@ public class recycleViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
         View view = mInflater.inflate(R.layout.item_flight_view, parent , false);
         MyViewHolder viewHolder = new MyViewHolder(view);
+
+        view.setOnClickListener( this);
         return viewHolder;
     }
 
@@ -38,18 +41,36 @@ public class recycleViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
         holder.dtimeBegin.setText( mDatas.get(position).getTimeBegin());
         holder.dtimeEnd.setText( mDatas.get(position).getTimeEnd());
         holder.dtransCity.setText( mDatas.get(position).getTransCity());
+
+        holder.itemView.setTag(mDatas);
     }
 
     @Override
     public int getItemCount() {
         return mDatas.size();
     }
+
+    @Override
+    public void onClick(View v) {
+        if(mOnItemClickListener != null ){
+            mOnItemClickListener.onItemClick(v, v.toString());
+        }
+    }
+
+    public static interface OnItemClickListener{
+        void onItemClick(View view, String data);
+    }
+
+    public void setmOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
 }
 
 
-class MyViewHolder extends RecyclerView.ViewHolder{
+class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    /**/
+
     TextView dwhereFrom;
     TextView dwhereTo ;
     TextView dtimeBegin ;
@@ -58,11 +79,15 @@ class MyViewHolder extends RecyclerView.ViewHolder{
 
     public MyViewHolder(View itemView) {
         super(itemView);
-
         dwhereFrom = (TextView) itemView.findViewById(R.id.where_from);
         dwhereTo = (TextView) itemView.findViewById(R.id.where_to);
         dtimeBegin = (TextView) itemView.findViewById(R.id.time_begin);
         dtimeEnd = (TextView) itemView.findViewById(R.id.time_end);
         dtransCity = (TextView) itemView.findViewById(R.id.trans_city);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

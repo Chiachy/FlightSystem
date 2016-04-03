@@ -26,7 +26,8 @@
         <activity
             android:name=".ActivityUserLogin"
             android:label="@string/title_activity_activity_user_login" />
-        <activity android:name=".ActivityBooking"></activity>
+        <activity android:name=".ActivityBooking" />
+        <activity android:name=".ActivityUserDetails"></activity>
     </application>
 
 </manifest>
