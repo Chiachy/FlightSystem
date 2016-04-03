@@ -95,8 +95,20 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
             new Toolbar.OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityUserLogin.class);
-            startActivity(intent);
+            switch (item.getItemId()){
+                case R.id.action_sign_in: {
+                    Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityUserLogin.class);
+                    startActivity(intent);
+                    break;
+                }
+                case R.id.action_search: {
+
+
+                    break;
+                }
+                default:
+                    break;
+            }
             return false;
         }
     };
@@ -108,21 +120,14 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        super.onCreateOptionsMenu(menu);
+        //super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_sign_in:
-                Intent intent = new Intent(ActivityFlightBrowsing.this , ActivityUserLogin.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 
