@@ -13,6 +13,7 @@ public class FlightDatas {
     private String timeEnd ;
     private String transCity ;
     private String day ;
+    private String isForigen;
 
     public String getCompanyId() {
         return companyId;
@@ -76,5 +77,13 @@ public class FlightDatas {
 
     public void setDay(String day) {
         this.day = day;
+    }
+
+    public String getIsForigen() {
+        return isForigen;
+    }
+
+    public void setIsForigen(String isForigen) {
+        this.isForigen = isForigen;
     }
 }

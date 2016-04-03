@@ -24,9 +24,24 @@ public class FlightDatabaseOpenHelper extends SQLiteOpenHelper {
             "time_end text ," +
             "trans_city text ," +
             "day text ," +
+            "isForigen text" +
             ") ";
 
-    private Context mContext;
+    public static final String CREATE_ORDER_TABLE = "create table OrderDatas(" +
+            "id integer primary key autoincrement," + //订单编号
+            "price integer" +
+            "flight_number text" +
+            ") ";
+
+    public static final String CREATE_USER_TABLE = "create table UserDatas(" +
+            "id integer primary key autoincrement," +
+            "password text" +
+            "name text" +
+            "sex text" +
+            "age integer" +
+            "balance integer" +
+            ") ";
+
 
     public FlightDatabaseOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -36,6 +51,8 @@ public class FlightDatabaseOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_DATAS);   //创建航班数据表
+        db.execSQL(CREATE_ORDER_TABLE);
+        db.execSQL(CREATE_USER_TABLE);
         //Toast.makeText(mContext, "创建成功！", Toast.LENGTH_SHORT).show();
     }
 
