@@ -15,6 +15,16 @@ public class FlightDatas {
     private String day ;
     private String isForigen;
 
+    public FlightDatas() {}
+
+    public FlightDatas(String whereFrom, String whereTo, String timeBegin, String timeEnd, String transCity){
+        this.whereFrom = whereFrom;
+        this.whereTo = whereTo;
+        this.timeBegin = timeBegin;
+        this.timeEnd = timeEnd;
+        this.transCity = transCity;
+    }
+
     public String getCompanyId() {
         return companyId;
     }

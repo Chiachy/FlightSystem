@@ -22,7 +22,7 @@ import java.util.List;
  * */
 public class ActivityFlightBrowsing extends AppCompatActivity {
 
-    public List<testData> testDataList = new ArrayList<testData>();
+    public List<FlightDatas> FlightDatasList = new ArrayList<>();
     private FloatingActionButton flightBroChooseButton;
     private RecyclerView userListView;
     private recycleViewAdapter mAdapter;
@@ -42,11 +42,11 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         fbToolbar.setOnMenuItemClickListener( onMenuItemClickListener );
 
         /** recycleView 配置代码块 */
-        initTestData();//初始化listView测试数据
+        initFlightDatas();//初始化listView测试数据
 
         initViews();//初始化RecycleView
 
-        mAdapter = new recycleViewAdapter(this , testDataList);
+        mAdapter = new recycleViewAdapter(this , FlightDatasList);
 
         userListView.setAdapter(mAdapter);
 
@@ -239,84 +239,48 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
     /**
      * 自定义测试用初始化数据,实现SQLite后弃用
      * */
-    private void initTestData() {
-        testData first = new testData("北京", "上海", "8:06", "10:38", "杭州");
-        testDataList.add(first);
-        testData second = new testData("深圳", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(second);
-        testData first3 = new testData("北京", "九龙", "14:06", "15:58", "长沙");
-        testDataList.add(first3);
-        testData first4 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first4);
-        testData first5 = new testData("西藏", "上海", "10:06", "10:38", "南昌");
-        testDataList.add(first5);
-        testData first6 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first6);
-        testData first7 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first7);
-        testData first8 = new testData("深圳", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first8);
-        testData first9 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first9);
-        testData first10 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first10);
-        testData first11 = new testData("西藏", "上海", "10:06", "10:38", "南昌");
-        testDataList.add(first11);
-        testData first12 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first12);
-        testData first13 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first13);
-        testData first14 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first14);
-        testData first15 = new testData("深圳", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first15);
-        testData first16 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first16);
-        testData first17 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first17);
-        testData first18 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first18);
-        testData first19 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first19);
-        testData first20 = new testData("北京", "上海", "8:06", "10:38", "南昌");
-        testDataList.add(first20);
+    private void initFlightDatas() {
+        FlightDatas first = new FlightDatas("北京", "上海", "8:06", "10:38", "杭州");
+        FlightDatasList.add(first);
+        FlightDatas second = new FlightDatas("深圳", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(second);
+        FlightDatas first3 = new FlightDatas("北京", "九龙", "14:06", "15:58", "长沙");
+        FlightDatasList.add(first3);
+        FlightDatas first4 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first4);
+        FlightDatas first5 = new FlightDatas("西藏", "上海", "10:06", "10:38", "南昌");
+        FlightDatasList.add(first5);
+        FlightDatas first6 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first6);
+        FlightDatas first7 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first7);
+        FlightDatas first8 = new FlightDatas("深圳", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first8);
+        FlightDatas first9 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first9);
+        FlightDatas first10 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first10);
+        FlightDatas first11 = new FlightDatas("西藏", "上海", "10:06", "10:38", "南昌");
+        FlightDatasList.add(first11);
+        FlightDatas first12 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first12);
+        FlightDatas first13 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first13);
+        FlightDatas first14 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first14);
+        FlightDatas first15 = new FlightDatas("深圳", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first15);
+        FlightDatas first16 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first16);
+        FlightDatas first17 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first17);
+        FlightDatas first18 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first18);
+        FlightDatas first19 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first19);
+        FlightDatas first20 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+        FlightDatasList.add(first20);
     }
-
-
-//    //测试数据适配器,适配于ListView
-//    public class testDataAdapter extends ArrayAdapter<testData>{
-//
-//        private int resourceId;
-//
-//    public testDataAdapter(Context context, int resource, List<com.shanshan.flightmanager.testData> objects) {
-//        super(context, resource, objects);
-//        resourceId = resource;
-//    }
-//
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        testData testData = getItem(position);//获取当前项testData的实例
-//        //优化getViee()
-//        View view;
-//        if ( convertView == null ){
-//            //将子项加载入布局
-//            view = LayoutInflater.from(getContext()).inflate(resourceId, null);
-//        }else{
-//            view = convertView;
-//        }
-//        TextView dwhereFrom = (TextView) view.findViewById(R.id.where_from);
-//        TextView dwhereTo = (TextView) view.findViewById(R.id.where_to);
-//        TextView dtimeBegin = (TextView) view.findViewById(R.id.time_begin);
-//        TextView dtimeEnd = (TextView) view.findViewById(R.id.time_end);
-//        TextView dtransCity = (TextView) view.findViewById(R.id.trans_city);
-//        dwhereFrom.setText(testData.getWhereFrom());
-//        dwhereTo.setText(testData.getWhereTo());
-//        dtimeBegin.setText(testData.getTimeBegin());
-//        dtimeEnd.setText(testData.getTimeEnd());
-//        dtransCity.setText(testData.getTransCity());
-//        return view;
-//    }
-//}
 
 }
 

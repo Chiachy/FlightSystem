@@ -25,7 +25,10 @@ public class StaticData extends Application {
     @Override
     public void onCreate() {
         isLogin = false;
-
+        UserDatas userDatas = new UserDatas();
+        userDatas.setId("shakugan");
+        userDatas.setPassword("123456");
+        FlightManagerDB.getInstance(this).saveUser(userDatas);
         //使用chrome调试本地数据库
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this).enableDumpapp(

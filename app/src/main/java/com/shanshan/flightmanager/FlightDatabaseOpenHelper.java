@@ -29,23 +29,23 @@ public class FlightDatabaseOpenHelper extends SQLiteOpenHelper {
 
     public static final String CREATE_ORDER_TABLE = "create table OrderDatas(" +
             "id integer primary key autoincrement," + //订单编号
-            "price integer" +
+            "user_id text," +
+            "price integer," +
             "flight_number text" +
             ") ";
 
     public static final String CREATE_USER_TABLE = "create table UserDatas(" +
-            "id integer primary key autoincrement," +
-            "password text" +
-            "name text" +
-            "sex text" +
-            "age integer" +
+            "id text primary key," +
+            "password text," +
+            "name text," +
+            "sex text," +
+            "age integer," +
             "balance integer" +
             ") ";
 
 
     public FlightDatabaseOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
-        //mContext = context;
     }
 
     @Override
@@ -53,12 +53,13 @@ public class FlightDatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_DATAS);   //创建航班数据表
         db.execSQL(CREATE_ORDER_TABLE);
         db.execSQL(CREATE_USER_TABLE);
-        //Toast.makeText(mContext, "创建成功！", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL(CREATE_DATAS);   //创建航班数据表
+        db.execSQL(CREATE_ORDER_TABLE);
+        db.execSQL(CREATE_USER_TABLE);
     }
 }
 

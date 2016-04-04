@@ -47,7 +47,7 @@ public class FlightManagerDB {
     * 将FlightDatas实例存储到数据库
     * */
     public void saveFlightDatas(FlightDatas flightDatas){
-        if(flightDatas != null){
+        if(flightDatas != null) {
             ContentValues values = new ContentValues();
             values.put("flight_number" , flightDatas.getFlightNumber());
             values.put("company_id" , flightDatas.getCompanyId());
@@ -137,6 +137,7 @@ public class FlightManagerDB {
                 OrderDatas orderDatas = new OrderDatas();
                 orderDatas.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 orderDatas.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+                orderDatas.setUserId(cursor.getString(cursor.getColumnIndex("user_id")));
                 orderDatas.setFlight_number(cursor.getString(cursor.getColumnIndex("flight_number")));
                 list.add(orderDatas);
             }while (cursor.moveToNext());
@@ -154,6 +155,7 @@ public class FlightManagerDB {
             ContentValues values = new ContentValues();
             values.put("id",orderDatas.getId());
             values.put("price",orderDatas.getPrice());
+            values.put("user_id",orderDatas.getUserId());
             values.put("flight_number",orderDatas.getFlight_number());
             db.insert("OrderDatas", null , values);
         }
@@ -175,9 +177,9 @@ public class FlightManagerDB {
      * @return  返回查找结果
      */
 
-    public UserDatas searchUser(int id) {
+    public UserDatas searchUser(String id) {
         UserDatas userDatas = new UserDatas();
-        Cursor c = db.rawQuery("select * from user where id=?",new String[]{String.valueOf(id)});
+        Cursor c = db.rawQuery("select * from UserDatas where id=?",new String[]{id});
         if(c.moveToFirst()) {
             userDatas.setId(id);
             userDatas.setAge(c.getInt(c.getColumnIndex("age")));
@@ -201,7 +203,7 @@ public class FlightManagerDB {
             values.put("age",userDatas.getAge());
             values.put("sex",userDatas.getSex());
             values.put("password",userDatas.getPassword());
-            values.put("name",userDatas.getPassword());
+            values.put("name",userDatas.getName());
             values.put("balance",userDatas.getBalance());
             db.insert("UserDatas",null,values);
         }

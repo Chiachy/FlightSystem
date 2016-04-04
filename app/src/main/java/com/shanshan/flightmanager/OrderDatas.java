@@ -4,7 +4,9 @@ package com.shanshan.flightmanager;
  * Created by Shakugan on 16/4/3.
  */
 public class OrderDatas {
+
     private int id;
+    private String userId;
     private String flight_number;
     private int price;
 
@@ -30,5 +32,13 @@ public class OrderDatas {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

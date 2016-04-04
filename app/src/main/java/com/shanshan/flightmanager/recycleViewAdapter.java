@@ -14,9 +14,9 @@ public class recycleViewAdapter extends RecyclerView.Adapter<MyViewHolder> imple
     private OnItemClickListener mOnItemClickListener = null;
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<testData> mDatas;
+    private List<FlightDatas> mDatas;
 
-    public recycleViewAdapter(Context context, List<testData> Datas){
+    public recycleViewAdapter(Context context, List<FlightDatas> Datas){
         this.mContext = context;
         this.mDatas = Datas;
         mInflater = LayoutInflater.from(context);
