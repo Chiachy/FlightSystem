@@ -17,12 +17,16 @@ public class FlightDatas {
 
     public FlightDatas() {}
 
-    public FlightDatas(String whereFrom, String whereTo, String timeBegin, String timeEnd, String transCity){
+    public FlightDatas(String companyId, String flightNumber ,String whereFrom, String whereTo,
+                       String timeBegin, String timeEnd, String transCity,String day ){
+        this.companyId = companyId;
+        this.flightNumber = flightNumber;
         this.whereFrom = whereFrom;
         this.whereTo = whereTo;
         this.timeBegin = timeBegin;
         this.timeEnd = timeEnd;
         this.transCity = transCity;
+        this.day = day;
     }
 
     public String getCompanyId() {

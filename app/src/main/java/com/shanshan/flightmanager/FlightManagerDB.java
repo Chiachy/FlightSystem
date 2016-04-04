@@ -49,15 +49,15 @@ public class FlightManagerDB {
     public void saveFlightDatas(FlightDatas flightDatas){
         if(flightDatas != null) {
             ContentValues values = new ContentValues();
-            values.put("flight_number" , flightDatas.getFlightNumber());
-            values.put("company_id" , flightDatas.getCompanyId());
-            values.put("where_from" , flightDatas.getWhereFrom());
-            values.put("where_to" , flightDatas.getWhereTo());
-            values.put("time_begin" , flightDatas.getTimeBegin());
-            values.put("time_end" , flightDatas.getTimeEnd());
-            values.put("trans_city" , flightDatas.getTransCity());
-            values.put("day" , flightDatas.getDay());
-            values.put("isForigen",flightDatas.getIsForigen());
+            values.put("flight_number" , flightDatas.getFlightNumber());  //航班号
+            values.put("company_id" , flightDatas.getCompanyId());        //公司
+            values.put("where_from" , flightDatas.getWhereFrom());        //始发地
+            values.put("where_to" , flightDatas.getWhereTo());            //降落地
+            values.put("time_begin" , flightDatas.getTimeBegin());        //起飞时间
+            values.put("time_end" , flightDatas.getTimeEnd());            //降落时间
+            values.put("trans_city" , flightDatas.getTransCity());        //中转城市
+            values.put("day" , flightDatas.getDay());                     //航班飞行日
+            values.put("isForigen",flightDatas.getIsForigen());           //国内外
             db.insert("FlightDatas", null , values);
         }
     }
@@ -122,6 +122,32 @@ public class FlightManagerDB {
                 cursor.close();
             }
         }
+        return list;
+    }
+
+    /**
+     * @param userId
+     * @return
+     */
+
+    public List<OrderDatas> searchOrderDatas(String userId ){
+        List<OrderDatas> list = new ArrayList<>();
+        Cursor cursor = null;
+
+        String sql = "select user_id from OrderDatas ";
+        String[] args = {userId};
+        cursor = db.rawQuery(sql, args);
+        if (cursor.moveToFirst()){
+            do {
+                OrderDatas orderDatas = new OrderDatas();
+                orderDatas.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                orderDatas.setFlight_number(cursor.getString(cursor.getColumnIndex("flight_number")));
+                orderDatas.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+                orderDatas.setUserId(cursor.getString(cursor.getColumnIndex("userId")));
+                list.add(orderDatas);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
         return list;
     }
 
@@ -204,7 +230,7 @@ public class FlightManagerDB {
             values.put("sex",userDatas.getSex());
             values.put("password",userDatas.getPassword());
             values.put("name",userDatas.getName());
-            values.put("balance",userDatas.getBalance());
+            //values.put("balance",userDatas.getBalance());
             db.insert("UserDatas",null,values);
         }
     }

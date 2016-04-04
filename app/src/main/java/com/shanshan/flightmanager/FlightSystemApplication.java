@@ -11,7 +11,7 @@ import com.facebook.stetho.Stetho;
 /**
  * 定义全局变量，标记是否登录
  * */
-public class StaticData extends Application {
+public class FlightSystemApplication extends Application {
     private boolean isLogin ;
 
     public boolean getIsLogin(){

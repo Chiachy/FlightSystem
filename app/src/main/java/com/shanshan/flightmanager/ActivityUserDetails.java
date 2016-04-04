@@ -11,7 +11,7 @@ import android.widget.Button;
 
 public class ActivityUserDetails extends Activity {
 
-    final StaticData application = (StaticData) getApplication();
+    final FlightSystemApplication application = (FlightSystemApplication) getApplication();
 
     private RecyclerView mRecyclerView;
     private recycleViewAdapter mAdapters;

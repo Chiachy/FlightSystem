@@ -4,35 +4,21 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
+import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toolbar;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -41,9 +27,6 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 
 public class ActivityUserLogin extends Activity {
-
-
-
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -68,13 +51,13 @@ public class ActivityUserLogin extends Activity {
     private View mProgressView;
     private View mLoginFormView;
     private Toolbar mUserLoginToolbar;
-
+    private TextView mSignUpTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_user_login);
-        final StaticData application = (StaticData) getApplication();
+        final FlightSystemApplication application = (FlightSystemApplication) getApplication();
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
@@ -95,7 +78,6 @@ public class ActivityUserLogin extends Activity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                //设置为已登录状态
             }
         });
 
@@ -107,6 +89,13 @@ public class ActivityUserLogin extends Activity {
         mUserLoginToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setActionBar(mUserLoginToolbar);
 
+        mSignUpTextView = (TextView) findViewById(R.id.sign_up );
+        mSignUpTextView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityUserLogin.this, ActivitySignUp.class));
+            }
+        });
     }
 
 //    private void populateAutoComplete() {
@@ -317,6 +306,7 @@ public class ActivityUserLogin extends Activity {
 
         private final String mEmail;
         private final String mPassword;
+        private UserDatas userDatas;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -334,7 +324,7 @@ public class ActivityUserLogin extends Activity {
                 return false;
             }
 
-            UserDatas userDatas = FlightManagerDB.getInstance(ActivityUserLogin.this).searchUser(mEmail);
+            userDatas = FlightManagerDB.getInstance(ActivityUserLogin.this).searchUser(mEmail);
             if (userDatas.getId() == null) {
                 return false;
             } else if (userDatas.getPassword().equals(mPassword)) {
@@ -351,6 +341,8 @@ public class ActivityUserLogin extends Activity {
 
             if (success) {
                 finish();
+                final FlightSystemApplication application = (FlightSystemApplication) getApplication();
+                application.setIsLogin(true);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

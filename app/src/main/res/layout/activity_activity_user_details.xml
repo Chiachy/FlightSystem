@@ -61,32 +61,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="账户余额:"
-        android:id="@+id/crash_balance"
-        android:layout_marginTop="54dp"
-        android:layout_below="@+id/user_name"
-        android:layout_alignStart="@+id/user_name" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="5400"
-        android:textColor="@color/skyBlue"
-        android:textSize="40sp"
-        android:id="@+id/user_crash_balance"
-        android:layout_alignBaseline="@+id/crash_balance"
-        android:layout_alignBottom="@+id/crash_balance"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="您的订单："
         android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/crash_balance" />
+        android:layout_below="@+id/textView21"
+        android:layout_alignEnd="@+id/textView21"
+        android:layout_marginTop="39dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/user_details"
@@ -106,5 +85,23 @@
         android:id="@+id/exit_login"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="您的用户名："
+        android:id="@+id/textView21"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/user_sex"
+        android:layout_alignStart="@+id/user_name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/user_id"
+        android:layout_alignBottom="@+id/textView21"
+        android:layout_toEndOf="@+id/textView21" />
 
 </RelativeLayout>

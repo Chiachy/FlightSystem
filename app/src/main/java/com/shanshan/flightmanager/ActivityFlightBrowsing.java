@@ -83,6 +83,8 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     /**
@@ -104,7 +106,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.action_sign_in: {
-                    final StaticData application = (StaticData) getApplication();
+                    final FlightSystemApplication application = (FlightSystemApplication) getApplication();
                     if(!application.getIsLogin()){
                         startActivity(new Intent(
                                 ActivityFlightBrowsing.this , ActivityUserLogin.class)
@@ -237,49 +239,89 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
     }
 
     /**
-     * 自定义测试用初始化数据,实现SQLite后弃用
+     * 自定义数据,实现SQLite用
      * */
     private void initFlightDatas() {
-        FlightDatas first = new FlightDatas("北京", "上海", "8:06", "10:38", "杭州");
+        FlightDatas first = new FlightDatas("四川航空", "3U8548" ,"北京", "上海", "8:06", "10:38",
+                "杭州", "2016.03.11");
         FlightDatasList.add(first);
-        FlightDatas second = new FlightDatas("深圳", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas second = new FlightDatas("南方航空", "CZ9902", "深圳", "上海", "8:06", "10:38",
+                "南昌", "2016.03.21");
         FlightDatasList.add(second);
-        FlightDatas first3 = new FlightDatas("北京", "九龙", "14:06", "15:58", "长沙");
+
+        FlightDatas first3 = new FlightDatas("中国国航", "CA4194","北京", "九龙", "14:06", "15:58",
+                "长沙","2016.03.38");
         FlightDatasList.add(first3);
-        FlightDatas first4 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first4 = new FlightDatas("山东航空", "SC4194", "北京", "上海", "8:06", "10:38",
+                "南昌", "2016.03.31");
         FlightDatasList.add(first4);
-        FlightDatas first5 = new FlightDatas("西藏", "上海", "10:06", "10:38", "南昌");
+
+        FlightDatas first5 = new FlightDatas("西藏航空" ,"TV6102", "西藏", "上海", "10:06", "10:38",
+                "南昌", "2016.03.23");
         FlightDatasList.add(first5);
-        FlightDatas first6 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first6 = new FlightDatas("深圳航空", "ZH4194", "北京", "上海", "8:06", "10:38",
+                "南昌", "2016.05.31");
         FlightDatasList.add(first6);
-        FlightDatas first7 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first7 = new FlightDatas("四川航空" , "3U8896","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.03.16");
         FlightDatasList.add(first7);
-        FlightDatas first8 = new FlightDatas("深圳", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first8 = new FlightDatas("海南航空" , "HU7147", "深圳", "上海", "8:06", "10:38",
+                "南昌", "2016.03.31");
         FlightDatasList.add(first8);
-        FlightDatas first9 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first9 = new FlightDatas("海南航空", "HU7147", "北京", "上海", "8:06", "10:38",
+                "南昌", "2016.05.30");
         FlightDatasList.add(first9);
-        FlightDatas first10 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first10 = new FlightDatas("中国国航","CA1405", "北京", "上海", "8:06", "10:38",
+                "南昌", "2016.02.18");
         FlightDatasList.add(first10);
-        FlightDatas first11 = new FlightDatas("西藏", "上海", "10:06", "10:38", "南昌");
+
+        FlightDatas first11 = new FlightDatas("中国国航","CA1405","西藏", "上海", "10:06", "10:38",
+                "南昌", "2016.02.21");
         FlightDatasList.add(first11);
-        FlightDatas first12 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first12 = new FlightDatas("山东航空","SC1405","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.06.19");
         FlightDatasList.add(first12);
-        FlightDatas first13 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first13 = new FlightDatas("西藏航空","TV6111","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.04.08");
         FlightDatasList.add(first13);
-        FlightDatas first14 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first14 = new FlightDatas("深圳航空","ZH1405","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.02.18");
         FlightDatasList.add(first14);
-        FlightDatas first15 = new FlightDatas("深圳", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first15 = new FlightDatas("联合航空","KN5215","深圳", "上海", "8:06", "10:38",
+                "南昌", "2016.03.01");
         FlightDatasList.add(first15);
-        FlightDatas first16 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first16 = new FlightDatas("厦门航空","MF1836","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.07.18");
         FlightDatasList.add(first16);
-        FlightDatas first17 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first17 = new FlightDatas("东方航空","MU3597","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.01.18");
         FlightDatasList.add(first17);
-        FlightDatas first18 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first18 = new FlightDatas("深圳航空","ZH1415","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.06.28");
         FlightDatasList.add(first18);
-        FlightDatas first19 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first19 = new FlightDatas("四川航空","3U8882","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.06.17");
         FlightDatasList.add(first19);
-        FlightDatas first20 = new FlightDatas("北京", "上海", "8:06", "10:38", "南昌");
+
+        FlightDatas first20 = new FlightDatas("东方航空","MU3561","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.02.18");
         FlightDatasList.add(first20);
+
     }
 
 }
