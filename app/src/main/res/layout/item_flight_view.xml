@@ -41,8 +41,8 @@
         android:layout_height="wrap_content"
         android:text="8:00"
         android:id="@+id/time_begin"
-        android:layout_marginStart="40dp"
-        android:layout_alignTop="@+id/where_to"
+        android:layout_marginStart="39dp"
+        android:layout_alignBottom="@+id/where_to"
         android:layout_toEndOf="@+id/where_to" />
 
     <TextView
@@ -66,8 +66,9 @@
         android:layout_height="wrap_content"
         android:text="中转："
         android:id="@+id/textView11"
-        android:layout_alignBottom="@+id/where_to"
-        android:layout_alignStart="@+id/time_begin" />
+        android:layout_marginStart="17dp"
+        android:layout_alignTop="@+id/where_to"
+        android:layout_toEndOf="@+id/time_end" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -76,5 +77,14 @@
         android:id="@+id/trans_city"
         android:layout_alignTop="@+id/textView11"
         android:layout_toEndOf="@+id/textView11" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="2014.03.02"
+        android:id="@+id/day"
+        android:layout_alignBottom="@+id/textView11"
+        android:layout_alignStart="@+id/time_begin" />
 
 </RelativeLayout>

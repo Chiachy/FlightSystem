@@ -12,28 +12,27 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.Toolbar;
-
-import java.util.ArrayList;
-import java.util.List;
 /**
  * A Flight Browsing User interface
  * 航班信息浏览界面，可以进行预定航班和查询、更改航班信息的操作，并登陆个人账号
  * */
 public class ActivityFlightBrowsing extends AppCompatActivity {
 
-    public List<FlightDatas> FlightDatasList = new ArrayList<>();
+    //public List<FlightDatas> FlightDatasList = new ArrayList<>();
     private FloatingActionButton flightBroChooseButton;
     private RecyclerView userListView;
-    private recycleViewAdapter mAdapter;
+    private RecycleViewAdapter mAdapter;
+    private FlightDatas mFlightDatas = new FlightDatas();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_browsing);
 
+        initFlightDatas4DB();
         /**Toolbar 配置代码块*/
-        //TODO: 2016/3/9 Toolbar代码块:Toolbar定义未完成
         Toolbar fbToolbar = (Toolbar) findViewById( R.id.fb_toolbar );
         fbToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setActionBar(fbToolbar);
@@ -42,11 +41,11 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         fbToolbar.setOnMenuItemClickListener( onMenuItemClickListener );
 
         /** recycleView 配置代码块 */
-        initFlightDatas();//初始化listView测试数据
+       // initFlightDatas();//初始化listView测试数据
 
         initViews();//初始化RecycleView
 
-        mAdapter = new recycleViewAdapter(this , FlightDatasList);
+        mAdapter = new RecycleViewAdapter(this , mFlightDatas);
 
         userListView.setAdapter(mAdapter);
 
@@ -67,10 +66,13 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
 
         userListView.addItemDecoration(recycViewDividerLine);
 
-        mAdapter.setmOnItemClickListener(new recycleViewAdapter.OnItemClickListener() {
+        mAdapter.setmOnItemClickListener(new RecycleViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, String data) {
-                startActivity(new Intent(ActivityFlightBrowsing.this, ActivityFlightDetails.class));
+                Intent intent = new Intent(ActivityFlightBrowsing.this, ActivityFlightDetails.class);
+                //intent.putExtra()
+
+                startActivity(intent);
             }
         });
 
@@ -81,6 +83,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent  = new Intent(ActivityFlightBrowsing.this , ActivityBooking.class);
                 startActivity(intent);
+                initFlightDatas4DB();
             }
         });
 
@@ -241,14 +244,16 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
     /**
      * 自定义数据,实现SQLite用
      * */
+/*
     private void initFlightDatas() {
+
         FlightDatas first = new FlightDatas("四川航空", "3U8548" ,"北京", "上海", "8:06", "10:38",
                 "杭州", "2016.03.11");
         FlightDatasList.add(first);
 
-        FlightDatas second = new FlightDatas("南方航空", "CZ9902", "深圳", "上海", "8:06", "10:38",
+        FlightDatas first2 = new FlightDatas("南方航空", "CZ9902", "深圳", "上海", "8:06", "10:38",
                 "南昌", "2016.03.21");
-        FlightDatasList.add(second);
+        FlightDatasList.add(first2);
 
         FlightDatas first3 = new FlightDatas("中国国航", "CA4194","北京", "九龙", "14:06", "15:58",
                 "长沙","2016.03.38");
@@ -262,7 +267,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
                 "南昌", "2016.03.23");
         FlightDatasList.add(first5);
 
-        FlightDatas first6 = new FlightDatas("深圳航空", "ZH4194", "北京", "上海", "8:06", "10:38",
+        FlightDatas first6 = new FlightDatas("深圳航空", "ZH4194", "北京", "上海", "18:06", "21:38",
                 "南昌", "2016.05.31");
         FlightDatasList.add(first6);
 
@@ -282,7 +287,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
                 "南昌", "2016.02.18");
         FlightDatasList.add(first10);
 
-        FlightDatas first11 = new FlightDatas("中国国航","CA1405","西藏", "上海", "10:06", "10:38",
+        FlightDatas first11 = new FlightDatas("中国国航","CA1405","西藏", "上海", "11:06", "17:38",
                 "南昌", "2016.02.21");
         FlightDatasList.add(first11);
 
@@ -298,7 +303,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
                 "南昌", "2016.02.18");
         FlightDatasList.add(first14);
 
-        FlightDatas first15 = new FlightDatas("联合航空","KN5215","深圳", "上海", "8:06", "10:38",
+        FlightDatas first15 = new FlightDatas("联合航空","KN5215","深圳", "上海", "14:06", "19:38",
                 "南昌", "2016.03.01");
         FlightDatasList.add(first15);
 
@@ -314,15 +319,103 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
                 "南昌", "2016.06.28");
         FlightDatasList.add(first18);
 
-        FlightDatas first19 = new FlightDatas("四川航空","3U8882","北京", "上海", "8:06", "10:38",
+        FlightDatas first19 = new FlightDatas("四川航空","3U8882","北京", "上海", "21:06", "22:38",
                 "南昌", "2016.06.17");
         FlightDatasList.add(first19);
 
         FlightDatas first20 = new FlightDatas("东方航空","MU3561","北京", "上海", "8:06", "10:38",
                 "南昌", "2016.02.18");
         FlightDatasList.add(first20);
+    }
+*/
+
+
+    private void initFlightDatas4DB() {
+
+        FlightManagerDB db = FlightManagerDB.getInstance(ActivityFlightBrowsing.this);
+
+        FlightDatas first = new FlightDatas("四川航空", "3U8548" ,"北京", "上海", "8:06", "10:38",
+                "杭州", "2016.03.11");
+        db.saveFlightDatas(first);
+
+        FlightDatas first2 = new FlightDatas("南方航空", "CZ9902", "深圳", "上海", "8:06", "10:38",
+                "南昌", "2016.03.21");
+        db.saveFlightDatas(first2);
+
+        FlightDatas first3 = new FlightDatas("中国国航", "CA4194","北京", "九龙", "14:06", "15:58",
+                "长沙","2016.03.38");
+        db.saveFlightDatas(first3);
+
+        FlightDatas first4 = new FlightDatas("山东航空", "SC4194", "北京", "上海", "8:06", "10:38",
+                "南昌", "2016.03.31");
+        db.saveFlightDatas(first4);
+
+        FlightDatas first5 = new FlightDatas("西藏航空" ,"TV6102", "西藏", "上海", "10:06", "10:38",
+                "南昌", "2016.03.23");
+        db.saveFlightDatas(first5);
+
+        FlightDatas first6 = new FlightDatas("深圳航空", "ZH4194", "北京", "上海", "8:06", "10:38",
+                "南昌", "2016.05.31");
+        db.saveFlightDatas(first6);
+
+        FlightDatas first7 = new FlightDatas("四川航空" , "3U8896","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.03.16");
+        db.saveFlightDatas(first7);
+
+        FlightDatas first8 = new FlightDatas("海南航空" , "HU7147", "深圳", "上海", "8:06", "10:38",
+                "南昌", "2016.03.31");
+        db.saveFlightDatas(first8);
+
+        FlightDatas first9 = new FlightDatas("海南航空", "HU7141", "北京", "上海", "8:06", "10:38",
+                "南昌", "2016.05.30");
+        db.saveFlightDatas(first9);
+
+        FlightDatas first10 = new FlightDatas("中国国航","CA1405", "北京", "上海", "8:06", "10:38",
+                "南昌", "2016.02.18");
+        db.saveFlightDatas(first10);
+
+        FlightDatas first11 = new FlightDatas("中国国航","CA1415","西藏", "上海", "10:06", "10:38",
+                "南昌", "2016.02.21");
+        db.saveFlightDatas(first11);
+
+        FlightDatas first12 = new FlightDatas("山东航空","SC1405","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.06.19");
+        db.saveFlightDatas(first12);
+
+        FlightDatas first13 = new FlightDatas("西藏航空","TV6111","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.04.08");
+        db.saveFlightDatas(first13);
+
+        FlightDatas first14 = new FlightDatas("深圳航空","ZH1405","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.02.18");
+        db.saveFlightDatas(first14);
+
+        FlightDatas first15 = new FlightDatas("联合航空","KN5215","深圳", "上海", "8:06", "10:38",
+                "南昌", "2016.03.01");
+        db.saveFlightDatas(first15);
+
+        FlightDatas first16 = new FlightDatas("厦门航空","MF1836","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.07.18");
+        db.saveFlightDatas(first16);
+
+        FlightDatas first17 = new FlightDatas("东方航空","MU3597","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.01.18");
+        db.saveFlightDatas(first17);
+
+        FlightDatas first18 = new FlightDatas("深圳航空","ZH1415","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.06.28");
+        db.saveFlightDatas(first18);
+
+        FlightDatas first19 = new FlightDatas("四川航空","3U8882","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.06.17");
+        db.saveFlightDatas(first19);
+
+        FlightDatas first20 = new FlightDatas("东方航空","MU3561","北京", "上海", "8:06", "10:38",
+                "南昌", "2016.02.18");
+        db.saveFlightDatas(first20);
+
+        Toast.makeText(ActivityFlightBrowsing.this, "数据库生成完毕" , Toast.LENGTH_LONG).show();
 
     }
-
 }
 

@@ -14,7 +14,7 @@ public class ActivityUserDetails extends Activity {
     final FlightSystemApplication application = (FlightSystemApplication) getApplication();
 
     private RecyclerView mRecyclerView;
-    private recycleViewAdapter mAdapters;
+    private RecycleViewAdapter mAdapters;
     private Button mButton;
 
     @Override
@@ -52,7 +52,7 @@ public class ActivityUserDetails extends Activity {
 
         mRecyclerView.addItemDecoration(recycViewDividerLine);
 
-        mAdapters.setmOnItemClickListener(new recycleViewAdapter.OnItemClickListener() {
+        mAdapters.setmOnItemClickListener(new RecycleViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, String data) {
 

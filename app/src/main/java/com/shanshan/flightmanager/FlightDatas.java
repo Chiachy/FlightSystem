@@ -4,9 +4,8 @@ package com.shanshan.flightmanager;
  * Created by shanshan on 2016/3/15.
  */
 public class FlightDatas {
-    private int id ;
     private String companyId ;
-    private String flightNumber ;
+    private String id ;
     private String whereFrom ;
     private String whereTo ;
     private String timeBegin ;
@@ -17,10 +16,10 @@ public class FlightDatas {
 
     public FlightDatas() {}
 
-    public FlightDatas(String companyId, String flightNumber ,String whereFrom, String whereTo,
+    public FlightDatas(String companyId, String id ,String whereFrom, String whereTo,
                        String timeBegin, String timeEnd, String transCity,String day ){
         this.companyId = companyId;
-        this.flightNumber = flightNumber;
+        this.id = id;
         this.whereFrom = whereFrom;
         this.whereTo = whereTo;
         this.timeBegin = timeBegin;
@@ -37,12 +36,12 @@ public class FlightDatas {
         this.companyId = companyId;
     }
 
-    public String getFlightNumber() {
-        return flightNumber;
+    public String getId() {
+        return id;
     }
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getWhereFrom() {

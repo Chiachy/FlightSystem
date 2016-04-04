@@ -9,16 +9,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class recycleViewAdapter extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
+public class RecycleViewAdapter extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
 
     private OnItemClickListener mOnItemClickListener = null;
     private LayoutInflater mInflater;
     private Context mContext;
     private List<FlightDatas> mDatas;
+    private FlightDatas mFlightDatas;
 
-    public recycleViewAdapter(Context context, List<FlightDatas> Datas){
+    public RecycleViewAdapter(Context context, FlightDatas Datas){
         this.mContext = context;
-        this.mDatas = Datas;
+        this.mFlightDatas = Datas;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -29,25 +30,26 @@ public class recycleViewAdapter extends RecyclerView.Adapter<MyViewHolder> imple
         View view = mInflater.inflate(R.layout.item_flight_view, parent , false);
         MyViewHolder viewHolder = new MyViewHolder(view);
 
-        view.setOnClickListener( this);
+        view.setOnClickListener(this);
         return viewHolder;
     }
 
     /*绑定ViewHolder*/
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.dwhereFrom.setText( mDatas.get(position).getWhereFrom());
-        holder.dwhereTo.setText( mDatas.get(position).getWhereTo());
-        holder.dtimeBegin.setText( mDatas.get(position).getTimeBegin());
-        holder.dtimeEnd.setText( mDatas.get(position).getTimeEnd());
-        holder.dtransCity.setText( mDatas.get(position).getTransCity());
-
-        holder.itemView.setTag(mDatas);
+        holder.dwhereFrom.setText( mFlightDatas.getWhereFrom());
+        holder.dwhereTo.setText( mFlightDatas.getWhereTo());
+        holder.dtimeBegin.setText( mFlightDatas.getTimeBegin());
+        holder.dtimeEnd.setText( mFlightDatas.getTimeEnd());
+        holder.dtransCity.setText( mFlightDatas.getTransCity());
+        holder.dDay.setText((mFlightDatas.getDay()));
+        holder.itemView.setTag(mFlightDatas);
     }
 
     @Override
     public int getItemCount() {
-        return mDatas.size();
+       // return mFlightDatas.size();
+        return 20;
     }
 
     @Override
@@ -76,6 +78,7 @@ class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListen
     TextView dtimeBegin ;
     TextView dtimeEnd ;
     TextView dtransCity ;
+    TextView dDay ;
 
     public MyViewHolder(View itemView) {
         super(itemView);
@@ -84,6 +87,7 @@ class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListen
         dtimeBegin = (TextView) itemView.findViewById(R.id.time_begin);
         dtimeEnd = (TextView) itemView.findViewById(R.id.time_end);
         dtransCity = (TextView) itemView.findViewById(R.id.trans_city);
+        dDay = (TextView) itemView.findViewById(R.id.day);
     }
 
     @Override

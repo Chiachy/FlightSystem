@@ -26,8 +26,9 @@ public class FlightSystemApplication extends Application {
     public void onCreate() {
         isLogin = false;
         UserDatas userDatas = new UserDatas();
+/*        userDatas.setName("钟圣麟");
         userDatas.setId("shakugan");
-        userDatas.setPassword("123456");
+        userDatas.setPassword("123456");*/
         FlightManagerDB.getInstance(this).saveUser(userDatas);
         //使用chrome调试本地数据库
         Stetho.initialize(

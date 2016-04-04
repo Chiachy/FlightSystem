@@ -23,6 +23,7 @@ public class ActivitySignUp extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_sign_up);
+
         userId = (EditText) findViewById(R.id.editText);
         userPassword = (EditText) findViewById(R.id.editText2);
         passwordConfirm = (EditText) findViewById(R.id.editText3);
@@ -42,6 +43,7 @@ public class ActivitySignUp extends Activity {
                         if(userPassword.getText().toString().equals(passwordConfirm.getText()
                                 .toString())){
                             UserDatas userDatas = new UserDatas();
+
                             userDatas.setId(userId.getText().toString());
                             userDatas.setPassword(userPassword.getText().toString());
                             userDatas.setSex(mRadioGroup.getCheckedRadioButtonId()

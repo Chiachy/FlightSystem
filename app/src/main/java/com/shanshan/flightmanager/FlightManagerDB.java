@@ -49,8 +49,8 @@ public class FlightManagerDB {
     public void saveFlightDatas(FlightDatas flightDatas){
         if(flightDatas != null) {
             ContentValues values = new ContentValues();
-            values.put("flight_number" , flightDatas.getFlightNumber());  //航班号
-            values.put("company_id" , flightDatas.getCompanyId());        //公司
+            values.put("company_id" , flightDatas.getCompanyId());
+            values.put("id" , flightDatas.getId());
             values.put("where_from" , flightDatas.getWhereFrom());        //始发地
             values.put("where_to" , flightDatas.getWhereTo());            //降落地
             values.put("time_begin" , flightDatas.getTimeBegin());        //起飞时间
@@ -71,7 +71,7 @@ public class FlightManagerDB {
         if (cursor.moveToFirst()) {
             do {
                 FlightDatas flightDatas = new FlightDatas();
-                flightDatas.setFlightNumber(cursor.getString(cursor.getColumnIndex("flight_number")));
+                flightDatas.setId(cursor.getString(cursor.getColumnIndex("flight_number")));
                 flightDatas.setCompanyId(cursor.getString(cursor.getColumnIndex("company_id")));
                 flightDatas.setWhereFrom(cursor.getString(cursor.getColumnIndex("where_from")));
                 flightDatas.setWhereTo(cursor.getString(cursor.getColumnIndex("where_to")));
@@ -102,7 +102,7 @@ public class FlightManagerDB {
             if (cursor.moveToFirst()) {
                 do {
                     FlightDatas flightDatas = new FlightDatas();
-                    flightDatas.setFlightNumber(cursor.getString(cursor.getColumnIndex("flight_number")));
+                    flightDatas.setId(cursor.getString(cursor.getColumnIndex("flight_number")));
                     flightDatas.setCompanyId(cursor.getString(cursor.getColumnIndex("company_id")));
                     flightDatas.setWhereFrom(cursor.getString(cursor.getColumnIndex("where_from")));
                     flightDatas.setWhereTo(cursor.getString(cursor.getColumnIndex("where_to")));
@@ -155,6 +155,7 @@ public class FlightManagerDB {
      * 加载所有订单信息
      * @return
      */
+
     public List<OrderDatas> loadOrderDatas() {
         List<OrderDatas> list = new ArrayList<>();
         Cursor cursor = db.query("OrderDatas" , null , null , null, null, null, null);
