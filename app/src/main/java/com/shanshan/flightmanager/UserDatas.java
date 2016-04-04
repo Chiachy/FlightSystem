@@ -6,18 +6,18 @@ package com.shanshan.flightmanager;
  */
 public class UserDatas {
 
-    private int id;
+    private String id;
     private String password;
     private String name;
     private String sex;
     private int age;
     private int balance;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
