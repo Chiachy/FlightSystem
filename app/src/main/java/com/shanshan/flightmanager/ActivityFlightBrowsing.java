@@ -31,7 +31,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_browsing);
 
-        initFlightDatas4DB();
+       // initFlightDatas4DB();
         /**Toolbar 配置代码块*/
         Toolbar fbToolbar = (Toolbar) findViewById( R.id.fb_toolbar );
         fbToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -83,7 +83,6 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent  = new Intent(ActivityFlightBrowsing.this , ActivityBooking.class);
                 startActivity(intent);
-                initFlightDatas4DB();
             }
         });
 

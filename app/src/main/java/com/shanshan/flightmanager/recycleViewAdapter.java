@@ -2,19 +2,17 @@ package com.shanshan.flightmanager;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
 
     private OnItemClickListener mOnItemClickListener = null;
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<FlightDatas> mDatas;
     private FlightDatas mFlightDatas;
 
     public RecycleViewAdapter(Context context, FlightDatas Datas){
@@ -43,6 +41,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<MyViewHolder> imple
         holder.dtimeEnd.setText( mFlightDatas.getTimeEnd());
         holder.dtransCity.setText( mFlightDatas.getTransCity());
         holder.dDay.setText((mFlightDatas.getDay()));
+
+        Log.i( mFlightDatas.getWhereFrom() , "mFlightDatas.getWhereFrom()" );
         holder.itemView.setTag(mFlightDatas);
     }
 
@@ -74,11 +74,11 @@ class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListen
 
 
     TextView dwhereFrom;
-    TextView dwhereTo ;
-    TextView dtimeBegin ;
-    TextView dtimeEnd ;
-    TextView dtransCity ;
-    TextView dDay ;
+    TextView dwhereTo;
+    TextView dtimeBegin;
+    TextView dtimeEnd;
+    TextView dtransCity;
+    TextView dDay;
 
     public MyViewHolder(View itemView) {
         super(itemView);
