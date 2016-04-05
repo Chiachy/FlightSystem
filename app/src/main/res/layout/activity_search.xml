@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/booking_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/skyBlue"
+        android:title="搜索" />
+
+    <EditText
+        android:maxEms="20"
+        android:maxLines="1"
+        android:id="@+id/search_edit"
+        android:hint="请输入关键字,如航班号等"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/search_btn"
+        android:layout_margin="16dp"
+        android:text="搜索"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -71,7 +71,7 @@ public class FlightManagerDB {
         if (cursor.moveToFirst()) {
             do {
                 FlightDatas flightDatas = new FlightDatas();
-                flightDatas.setId(cursor.getString(cursor.getColumnIndex("flight_number")));
+                flightDatas.setId(cursor.getString(cursor.getColumnIndex("id")));
                 flightDatas.setCompanyId(cursor.getString(cursor.getColumnIndex("company_id")));
                 flightDatas.setWhereFrom(cursor.getString(cursor.getColumnIndex("where_from")));
                 flightDatas.setWhereTo(cursor.getString(cursor.getColumnIndex("where_to")));
@@ -95,33 +95,25 @@ public class FlightManagerDB {
     public List<FlightDatas> searchFlight(String row){
         List<FlightDatas> list = new ArrayList<>();
         Cursor cursor = null;
-        try {
-            String sql = "select * from FlightDatas order by flight_number asc";
-            String[] args = {row};
-            cursor = db.rawQuery(sql,args);
-            if (cursor.moveToFirst()) {
-                do {
-                    FlightDatas flightDatas = new FlightDatas();
-                    flightDatas.setId(cursor.getString(cursor.getColumnIndex("flight_number")));
-                    flightDatas.setCompanyId(cursor.getString(cursor.getColumnIndex("company_id")));
-                    flightDatas.setWhereFrom(cursor.getString(cursor.getColumnIndex("where_from")));
-                    flightDatas.setWhereTo(cursor.getString(cursor.getColumnIndex("where_to")));
-                    flightDatas.setTimeBegin(cursor.getString(cursor.getColumnIndex("time_begin")));
-                    flightDatas.setTimeEnd(cursor.getString(cursor.getColumnIndex("time_end")));
-                    flightDatas.setTransCity(cursor.getString(cursor.getColumnIndex("trans_city")));
-                    flightDatas.setDay(cursor.getString(cursor.getColumnIndex("day")));
-                    flightDatas.setDay(cursor.getString(cursor.getColumnIndex("isForigen")));
-                    list.add(flightDatas);
-                } while (cursor.moveToNext());
-            }
-        } catch (Exception e) {
-            Log.e("SearchPhoto Exception",e.getMessage());
-            e.printStackTrace();
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+        String sql = "select * from FlightDatas where id=? or where_from=? or where_to=?";
+        String[] args = {row};
+        cursor = db.rawQuery(sql,args);
+        if (cursor.moveToFirst()) {
+            do {
+                FlightDatas flightDatas = new FlightDatas();
+                flightDatas.setId(cursor.getString(cursor.getColumnIndex("id")));
+                flightDatas.setCompanyId(cursor.getString(cursor.getColumnIndex("company_id")));
+                flightDatas.setWhereFrom(cursor.getString(cursor.getColumnIndex("where_from")));
+                flightDatas.setWhereTo(cursor.getString(cursor.getColumnIndex("where_to")));
+                flightDatas.setTimeBegin(cursor.getString(cursor.getColumnIndex("time_begin")));
+                flightDatas.setTimeEnd(cursor.getString(cursor.getColumnIndex("time_end")));
+                flightDatas.setTransCity(cursor.getString(cursor.getColumnIndex("trans_city")));
+                flightDatas.setDay(cursor.getString(cursor.getColumnIndex("day")));
+                flightDatas.setDay(cursor.getString(cursor.getColumnIndex("isForigen")));
+                list.add(flightDatas);
+            } while (cursor.moveToNext());
         }
+        cursor.close();
         return list;
     }
 
@@ -130,11 +122,10 @@ public class FlightManagerDB {
      * @return
      */
 
-    public List<OrderDatas> searchOrderDatas(String userId ){
+    public List<OrderDatas> searchOrderDatas(String userId){
         List<OrderDatas> list = new ArrayList<>();
         Cursor cursor = null;
-
-        String sql = "select user_id from OrderDatas ";
+        String sql = "select * from OrderDatas where user_id=?";
         String[] args = {userId};
         cursor = db.rawQuery(sql, args);
         if (cursor.moveToFirst()){
@@ -143,7 +134,7 @@ public class FlightManagerDB {
                 orderDatas.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 orderDatas.setFlight_number(cursor.getString(cursor.getColumnIndex("flight_number")));
                 orderDatas.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
-                orderDatas.setUserId(cursor.getString(cursor.getColumnIndex("userId")));
+                orderDatas.setUserId(cursor.getString(cursor.getColumnIndex("user_id")));
                 list.add(orderDatas);
             }while (cursor.moveToNext());
         }
@@ -180,7 +171,7 @@ public class FlightManagerDB {
     public void saveOrderData(OrderDatas orderDatas) {
         if(orderDatas != null){
             ContentValues values = new ContentValues();
-            values.put("id",orderDatas.getId());
+//            values.put("id",orderDatas.getId());
             values.put("price",orderDatas.getPrice());
             values.put("user_id",orderDatas.getUserId());
             values.put("flight_number",orderDatas.getFlight_number());

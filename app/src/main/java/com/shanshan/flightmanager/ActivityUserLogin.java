@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -18,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 /**
@@ -52,6 +54,7 @@ public class ActivityUserLogin extends Activity {
     private View mLoginFormView;
     private Toolbar mUserLoginToolbar;
     private TextView mSignUpTextView;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,13 @@ public class ActivityUserLogin extends Activity {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                    dialog = new ProgressDialog(ActivityUserLogin.this);
+                    dialog.setProgressStyle(R.attr.progressBarStyle);
+                    dialog.setMessage("加载中...");
+                    dialog.setIndeterminate(true);              //设置进度条是否为不明确
+                    dialog.setCancelable(false);                //设置进度条是否可以按退回键取消
+                    dialog.setCanceledOnTouchOutside(false);    //设置点击进度对话框外的区域对话框不消失
+                    dialog.show();
                     attemptLogin();
                     return true;
                 }
@@ -328,6 +338,7 @@ public class ActivityUserLogin extends Activity {
             if (userDatas.getId() == null) {
                 return false;
             } else if (userDatas.getPassword().equals(mPassword)) {
+                ActivityUserDetails.id = mEmail;
                 return true;
             }
             // TODO: register the new account here.
@@ -342,6 +353,7 @@ public class ActivityUserLogin extends Activity {
             if (success) {
                 finish();
                 final FlightSystemApplication application = (FlightSystemApplication) getApplication();
+                Toast.makeText(ActivityUserLogin.this, "登入成功", Toast.LENGTH_LONG ).show();
                 application.setIsLogin(true);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -353,6 +365,7 @@ public class ActivityUserLogin extends Activity {
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+            dialog.dismiss();
         }
     }
 }

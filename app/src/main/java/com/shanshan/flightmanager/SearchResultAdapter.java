@@ -11,14 +11,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mInflater;
     private Context mContext;
     public static List<FlightDatas> mDatas = new ArrayList<>();
 //    private FlightDatas mFlightDatas;
 
-    public RecycleViewAdapter(Context context, List<FlightDatas> mDatas){
+    public SearchResultAdapter(Context context, List<FlightDatas> mDatas){
         this.mContext = context;
         this.mDatas = mDatas;
         mInflater = LayoutInflater.from(context);
@@ -45,7 +45,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-       // return mFlightDatas.size();
+        // return mFlightDatas.size();
         return mDatas.size();
     }
 
@@ -73,6 +73,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     Intent intent = new Intent(mContext, ActivityFlightDetails.class);
                     //intent.putExtra()
                     intent.putExtra("id",(int)itemView.getTag());
+                    intent.putExtra("isSearchResult",true);
                     mContext.startActivity(intent);
                 }
             });
