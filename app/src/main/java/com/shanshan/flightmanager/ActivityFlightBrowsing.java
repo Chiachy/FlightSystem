@@ -14,24 +14,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A Flight Browsing User interface
  * 航班信息浏览界面，可以进行预定航班和查询、更改航班信息的操作，并登陆个人账号
  * */
 public class ActivityFlightBrowsing extends AppCompatActivity {
 
-    //public List<FlightDatas> FlightDatasList = new ArrayList<>();
     private FloatingActionButton flightBroChooseButton;
     private RecyclerView userListView;
     private RecycleViewAdapter mAdapter;
-    private FlightDatas mFlightDatas = new FlightDatas();
+//    private FlightDatas mFlightDatas = new FlightDatas();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_browsing);
 
-        initFlightDatas4DB();
+//        initFlightDatas4DB();
         /**Toolbar 配置代码块*/
         Toolbar fbToolbar = (Toolbar) findViewById( R.id.fb_toolbar );
         fbToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -45,7 +48,7 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
 
         initViews();//初始化RecycleView
 
-        mAdapter = new RecycleViewAdapter(this , mFlightDatas);
+        mAdapter = new RecycleViewAdapter(this , FlightManagerDB.getInstance(this).loadFlightDatas());
 
         userListView.setAdapter(mAdapter);
 
@@ -66,24 +69,14 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
 
         userListView.addItemDecoration(recycViewDividerLine);
 
-        mAdapter.setmOnItemClickListener(new RecycleViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, String data) {
-                Intent intent = new Intent(ActivityFlightBrowsing.this, ActivityFlightDetails.class);
-                //intent.putExtra()
-
-                startActivity(intent);
-            }
-        });
-
         /** fab配置代码块 */
         flightBroChooseButton = (FloatingActionButton) findViewById(R.id.flight_bro_choose_button);
         flightBroChooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(ActivityFlightBrowsing.this , ActivityBooking.class);
+                Intent intent  = new Intent(ActivityFlightBrowsing.this , ActivitySearch.class);
                 startActivity(intent);
-                initFlightDatas4DB();
+//                initFlightDatas4DB();
             }
         });
 
@@ -328,7 +321,6 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         FlightDatasList.add(first20);
     }
 */
-
 
     private void initFlightDatas4DB() {
 

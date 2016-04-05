@@ -10,6 +10,16 @@ public class OrderDatas {
     private String flight_number;
     private int price;
 
+    public OrderDatas() {
+
+    }
+
+    public OrderDatas(String userId,String flight_number,int price) {
+        this.userId = userId;
+        this.flight_number = flight_number;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

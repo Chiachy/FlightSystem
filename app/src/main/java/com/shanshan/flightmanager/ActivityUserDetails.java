@@ -1,26 +1,55 @@
 package com.shanshan.flightmanager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityUserDetails extends Activity {
 
     final FlightSystemApplication application = (FlightSystemApplication) getApplication();
 
     private RecyclerView mRecyclerView;
-    private RecycleViewAdapter mAdapters;
+    private OrderAdapter orderAdapter;
     private Button mButton;
+
+    public static String id;
+    private UserDatas userDatas;
+    private TextView name;
+    private TextView userId;
+    private TextView sex;
+    private TextView age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_user_details);
+        userDatas = FlightManagerDB.getInstance(this).searchUser(id);
+        name = (TextView) findViewById(R.id.user_name);
+        userId = (TextView) findViewById(R.id.user_id);
+        sex = (TextView) findViewById(R.id.user_sex);
+        age = (TextView) findViewById(R.id.user_age);
+        name.setText(userDatas.getName());
+        if (userDatas.getSex().equals("男")) {
+            sex.setText("先生");
+        } else {
+            sex.setText("女士");
+        }
+        userId.setText(userDatas.getId());
+        age.setText(String.valueOf(userDatas.getAge()));
+
         mButton = (Button) findViewById(R.id.exit_login);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,113 +72,55 @@ public class ActivityUserDetails extends Activity {
 
         mRecyclerView.setHasFixedSize(true);//提高性能
 
-        //设置分割线属性，并调用
-        DividerLine recycViewDividerLine = new DividerLine(DividerLine.HORIZONTAL);
+        orderAdapter = new OrderAdapter(this,FlightManagerDB.getInstance(this).searchOrderDatas(userDatas.getId()));
 
-        recycViewDividerLine.setSize(15);
+        mRecyclerView.setAdapter(orderAdapter);
 
-        recycViewDividerLine.setColor(0xFFDDDDDD);
-
-        mRecyclerView.addItemDecoration(recycViewDividerLine);
-
-        mAdapters.setmOnItemClickListener(new RecycleViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, String data) {
-
-            }
-        });
+        if (orderAdapter.getItemCount() != 0) {
+            TextView textView = (TextView) findViewById(R.id.list_info);
+            textView.setVisibility(View.GONE);
+        }
     }
 
 
-    /**
-     * RecycleView 分割线装饰类
-     */
-    public class DividerLine extends RecyclerView.ItemDecoration {
 
-        public static final int HORIZONTAL = LinearLayoutManager.HORIZONTAL;
+    private class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        public static final int VERTICAL = LinearLayoutManager.VERTICAL;
+        private List<OrderDatas> orderDatasList = new ArrayList<>();
+        private Context context;
+        private LayoutInflater inflater;
 
-        private Paint paint;//画笔
-
-        private int orientation;//布局方向
-
-        private int color;//分割线颜色
-
-        private int size;//分割线尺寸
-
-        //分割线尺寸
-        public DividerLine(){
-            this(VERTICAL);
-        }
-
-        public DividerLine(int orientation){
-            this.orientation = orientation;
-            paint = new Paint();
+        public OrderAdapter(Context context,List<OrderDatas> datasList) {
+            orderDatasList = datasList;
+            this.context = context;
+            inflater = LayoutInflater.from(context);
         }
 
         @Override
-        public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-            super.onDrawOver(c, parent, state);
-
-            if (orientation == VERTICAL) {
-                drawHorizontal(c, parent);
-            } else {
-                drawHorizontal(c, parent);
-            }
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new MyViewHodler(inflater.inflate(R.layout.item_order_list,parent,false));
         }
 
-        /*
-        * 设置分割线
-        *
-        * @param color 颜色
-        * */
-        public void setColor(int color) {
-            this.color = color;
-            paint.setColor(color);
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            ((MyViewHodler)holder).orderInfo.setText(String.valueOf(orderDatasList.get(position).getId()));
+            ((MyViewHodler)holder).flightNumber.setText(orderDatasList.get(position).getFlight_number());
         }
 
-        /*
-        *设置分割线尺寸
-        *
-        * @param size 尺寸
-        * */
-        public void setSize(int size){
-            this.size = size ;
+        @Override
+        public int getItemCount() {
+            return orderDatasList.size();
         }
 
-        /*
-        * 绘制垂直分割线
-        * */
-        protected void drawVertical(Canvas c, RecyclerView parent){
-            final int top = parent.getPaddingTop();
-            final int bottom = parent.getHeight() - parent.getPaddingBottom();
+        private class MyViewHodler extends RecyclerView.ViewHolder {
 
-            final int childCount = parent.getChildCount();
-            for (int i = 0; i < childCount ; i++){
-                final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params =
-                        (RecyclerView.LayoutParams) child.getLayoutParams();
-                final int left = child.getRight() + params.rightMargin;
-                final int right = left + size ;
+            TextView orderInfo;
+            TextView flightNumber;
 
-                c.drawRect(left , top , right , bottom, paint);
-            }
-        }
-        //绘制水平风格线
-        private void drawHorizontal(Canvas c, RecyclerView parent) {
-            final int left = parent.getPaddingLeft();
-            final int right = parent.getWidth() - parent.getPaddingRight();
-
-            final int childCount = parent.getChildCount();
-            for(int i= 0; i < childCount ; i++){
-                final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params =
-                        (RecyclerView.LayoutParams) child.getLayoutParams();
-                final int top = child.getBottom() + params.bottomMargin;
-                final int bottom = top + size ;
-
-                c.drawRect(left , top , right , bottom, paint);
+            public MyViewHodler(View itemView) {
+                super(itemView);
+                orderInfo = (TextView) itemView.findViewById(R.id.orderInfo);
+                flightNumber = (TextView) itemView.findViewById(R.id.flight_number);
             }
         }
     }
