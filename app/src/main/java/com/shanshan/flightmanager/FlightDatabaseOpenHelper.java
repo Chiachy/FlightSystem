@@ -2,6 +2,7 @@ package com.shanshan.flightmanager;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
@@ -10,6 +11,13 @@ import android.database.sqlite.SQLiteOpenHelper;
  * 这是一个数据库操作辅助类
  */
 public class FlightDatabaseOpenHelper extends SQLiteOpenHelper {
+
+    public FlightDatabaseOpenHelper(Context context, String name,
+                          SQLiteDatabase.CursorFactory factory, int version) {
+
+        super(context, name, factory, version);
+        // TODO Auto-generated constructor stub
+    }
 
     /*
     * FlightDatas表建表语句
@@ -44,10 +52,6 @@ public class FlightDatabaseOpenHelper extends SQLiteOpenHelper {
             ") ";
 
 
-    public FlightDatabaseOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
-    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_DATAS);   //创建航班数据表
@@ -61,5 +65,22 @@ public class FlightDatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_ORDER_TABLE);
         db.execSQL(CREATE_USER_TABLE);
     }
+
+    public boolean checkDataBase(){
+        SQLiteDatabase checkDB = null;
+        try{
+            String myPath = "/data/data/com.shanshan.flightmanager/" + "FlightDatas";
+            checkDB = SQLiteDatabase.openDatabase(myPath, null,
+                    SQLiteDatabase.OPEN_READONLY | SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+        }catch(SQLiteException e){
+            //database does't exist yet.
+        }
+        if(checkDB != null){
+            checkDB.close();
+        }
+        return checkDB != null ? true : false;
+    }
+
+
 }
 

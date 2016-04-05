@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -225,5 +226,21 @@ public class FlightManagerDB {
             db.insert("UserDatas",null,values);
         }
     }
+
+    public boolean checkDataBase(){
+        SQLiteDatabase checkDB = null;
+        try{
+            String myPath = "/data/data/com.shanshan.flightmanager/" + "FlightDatas";
+            checkDB = SQLiteDatabase.openDatabase(myPath, null,
+                    SQLiteDatabase.OPEN_READONLY | SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+        }catch(SQLiteException e){
+            //database does't exist yet.
+        }
+        if(checkDB != null){
+            checkDB.close();
+        }
+        return checkDB != null ? true : false;
+    }
+
 
 }

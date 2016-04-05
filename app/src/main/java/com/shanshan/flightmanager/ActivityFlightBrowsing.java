@@ -1,6 +1,7 @@
 package com.shanshan.flightmanager;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,19 +20,26 @@ import android.widget.Toolbar;
  * */
 public class ActivityFlightBrowsing extends AppCompatActivity {
 
+
+    private SQLiteDatabase db1;
     private FloatingActionButton flightBroChooseButton;
     private RecyclerView userListView;
     private recycleViewAdapter mAdapter;
+    private FlightManagerDB mFlightDatabaseOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_browsing);
+        //File file = getExternalCacheDir();
 
-        //initFlightDatas4DB();
+        mFlightDatabaseOpenHelper = FlightManagerDB.getInstance(ActivityFlightBrowsing.this);
+        if(!mFlightDatabaseOpenHelper.checkDataBase()){ initFlightDatas4DB(); }
+
+
         /**Toolbar 配置代码块*/
         Toolbar fbToolbar = (Toolbar) findViewById( R.id.fb_toolbar );
-        fbToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        fbToolbar.setTitleTextColor( Color.parseColor( "#ffffff" ) );
         setActionBar(fbToolbar);
 
         //绑定item的点击事件,并调用
@@ -70,11 +78,9 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent  = new Intent(ActivityFlightBrowsing.this , ActivitySearch.class);
                 startActivity(intent);
-//                initFlightDatas4DB();
+                //initFlightDatas4DB();
             }
         });
-
-
     }
 
     /**
@@ -84,19 +90,17 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         userListView = (RecyclerView) findViewById(R.id.userlistView);
     }
 
-    /**
-     * toolbar配置
-     * */
     /*
-    * 设置menu item的监听器
-    * */
+     *  设置menu item的监听器
+     */
     private Toolbar.OnMenuItemClickListener onMenuItemClickListener =
             new Toolbar.OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.action_sign_in: {
-                    final FlightSystemApplication application = (FlightSystemApplication) getApplication();
+                    final FlightSystemApplication application = (FlightSystemApplication)
+                            getApplication();
                     if(!application.getIsLogin()){
                         startActivity(new Intent(
                                 ActivityFlightBrowsing.this , ActivityUserLogin.class)
@@ -108,7 +112,6 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
                     }
                     break;
                 }
-
                 default:
                     break;
             }
@@ -219,7 +222,9 @@ public class ActivityFlightBrowsing extends AppCompatActivity {
         db.saveFlightDatas(first20);
 
         Toast.makeText(ActivityFlightBrowsing.this, "数据库生成完毕" , Toast.LENGTH_LONG).show();
-
     }
+
+
+
 }
 
