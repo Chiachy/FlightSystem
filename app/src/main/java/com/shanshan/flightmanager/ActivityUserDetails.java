@@ -2,12 +2,9 @@ package com.shanshan.flightmanager;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +69,17 @@ public class ActivityUserDetails extends Activity {
 
         mRecyclerView.setHasFixedSize(true);//提高性能
 
-        orderAdapter = new OrderAdapter(this,FlightManagerDB.getInstance(this).searchOrderDatas(userDatas.getId()));
+        orderAdapter = new OrderAdapter(this,FlightManagerDB.getInstance(this)
+                .searchOrderDatas(userDatas.getId()));
+
+        RecyclerViewDividerLine recycViewDividerLine =
+                new RecyclerViewDividerLine(RecyclerViewDividerLine.HORIZONTAL);
+
+        recycViewDividerLine.setSize(5);
+
+        recycViewDividerLine.setColor(0xFFDDDDDD);
+
+        mRecyclerView.addItemDecoration(recycViewDividerLine);
 
         mRecyclerView.setAdapter(orderAdapter);
 

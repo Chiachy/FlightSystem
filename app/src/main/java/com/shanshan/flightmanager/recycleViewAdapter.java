@@ -3,6 +3,7 @@ package com.shanshan.flightmanager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class recycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mInflater;
     private Context mContext;
     public static List<FlightDatas> mDatas = new ArrayList<>();
-//    private FlightDatas mFlightDatas;
 
-    public RecycleViewAdapter(Context context, List<FlightDatas> mDatas){
+    public recycleViewAdapter(Context context, List<FlightDatas> mDatas){
         this.mContext = context;
         this.mDatas = mDatas;
         mInflater = LayoutInflater.from(context);
@@ -40,17 +40,16 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         ((MyViewHolder)holder).dtimeEnd.setText( mDatas.get(position).getTimeEnd());
         ((MyViewHolder)holder).dtransCity.setText( mDatas.get(position).getTransCity());
         ((MyViewHolder)holder).dDay.setText((mDatas.get(position).getDay()));
+        Log.i("DATA", mDatas.get(position).getDay() );
         ((MyViewHolder)holder).itemView.setTag(position);
     }
 
     @Override
     public int getItemCount() {
-       // return mFlightDatas.size();
         return mDatas.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-
 
         TextView dwhereFrom;
         TextView dwhereTo ;

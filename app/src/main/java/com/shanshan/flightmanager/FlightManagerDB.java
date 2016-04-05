@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +78,7 @@ public class FlightManagerDB {
                 flightDatas.setTimeEnd(cursor.getString(cursor.getColumnIndex("time_end")));
                 flightDatas.setTransCity(cursor.getString(cursor.getColumnIndex("trans_city")));
                 flightDatas.setDay(cursor.getString(cursor.getColumnIndex("day")));
-                flightDatas.setDay(cursor.getString(cursor.getColumnIndex("isForigen")));
+                flightDatas.setIsForigen(cursor.getString(cursor.getColumnIndex("isForigen")));
                 list.add(flightDatas);
             }while (cursor.moveToNext());
         }

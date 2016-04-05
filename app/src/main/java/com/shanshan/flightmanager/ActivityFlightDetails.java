@@ -69,8 +69,9 @@ public class ActivityFlightDetails extends Activity {
         if (getIntent().getBooleanExtra("isSearchResult",false)) {
             datas = SearchResultAdapter.mDatas.get(getIntent().getIntExtra("id",0));
         } else {
-            datas = RecycleViewAdapter.mDatas.get(getIntent().getIntExtra("id", 0));
+            datas = recycleViewAdapter.mDatas.get(getIntent().getIntExtra("id", 0));
         }
+
         mConpanyName.setText(datas.getCompanyId());
         mFlightNumber.setText(datas.getId());
         mDay.setText(datas.getDay());
